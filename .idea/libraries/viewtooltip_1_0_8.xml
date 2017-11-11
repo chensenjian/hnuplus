@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="viewtooltip-1.0.8">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.florent37/viewtooltip/1.0.8/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.florent37/viewtooltip/1.0.8/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.florent37/viewtooltip/1.0.8/23c9e1db9190b4842453ea1534363c26b41ae9f4/viewtooltip-1.0.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

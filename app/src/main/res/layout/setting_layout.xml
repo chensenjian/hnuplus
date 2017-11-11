@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_avatar_placeholder"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            />
+        <TextView
+            android:id="@+id/tv_signinstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are not signin"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            />
+        <Button
+            android:id="@+id/btn_signin_1"
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp"
+            android:text="signin"/>
+        <Button
+            android:id="@+id/btn_signout"
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="signout"/>
+
+</LinearLayout>
+

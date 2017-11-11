@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/animation_list"
+    android:id="@+id/container">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_avatar_placeholder"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_username_2"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:hint="Your username"
+            app:met_textColor="@color/white"
+            app:met_floatingLabelTextSize="15sp"
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_password_2"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:hint="Your password"
+            app:met_textColor="@color/white"
+            app:met_floatingLabelTextSize="15sp"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_password_confirm"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:hint="Confirm your password"
+            app:met_textColor="@color/white"
+            app:met_floatingLabelTextSize="15sp"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_email"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:hint="Your email   (optional)"
+            app:met_textColor="@color/white"
+            app:met_floatingLabelTextSize="15sp"
+            android:layout_marginBottom="15dp"
+            />
+
+
+        <Button
+            android:id="@+id/btn_signup_2"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp"
+            android:text="signup"/>
+
+        <Button
+            android:id="@+id/btn_back_2"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="back"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
