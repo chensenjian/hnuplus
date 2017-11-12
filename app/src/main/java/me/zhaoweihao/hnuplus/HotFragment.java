@@ -20,6 +20,8 @@ import com.yalantis.phoenix.PullToRefreshView;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -37,11 +39,15 @@ import static android.app.Activity.RESULT_OK;
 
 public class HotFragment extends Fragment  {
 
-    private RecyclerView recyclerView;
+    /**
+     * Butter Knife
+     */
+    @BindView(R.id.rv_posts) RecyclerView recyclerView;
+    @BindView(R.id.pull_to_refresh) PullToRefreshView mPullToRefreshView;
+    @BindView(R.id.fb) FloatingActionButton floatingActionButton;
+
     private LinearLayoutManager layoutManager;
     private PostAdapter adapter;
-    private PullToRefreshView mPullToRefreshView;
-    private FloatingActionButton floatingActionButton;
     private MyUser userInfo;
 
     @Override
@@ -57,7 +63,7 @@ public class HotFragment extends Fragment  {
         View hotLayout = inflater.inflate(R.layout.hot_layout,
                 container, false);
 
-        initViews(hotLayout);
+        ButterKnife.bind(this, hotLayout);
 
         refreshRecyclerView();
 
@@ -104,14 +110,6 @@ public class HotFragment extends Fragment  {
         });
 
         return hotLayout;
-    }
-
-    private void initViews(View view){
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_posts);
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
-        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fb);
-
     }
 
     private void refreshRecyclerView(){

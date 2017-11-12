@@ -15,10 +15,11 @@ import android.widget.LinearLayout;
 
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-
 
 /**
  * Created by Administrator on 2017/11/10.
@@ -26,10 +27,17 @@ import cn.bmob.v3.listener.SaveListener;
 
 public class SigninFragment extends Fragment{
 
-    private LinearLayout mContainer;
+    /**
+     * Butter Knife
+     */
+    @BindView(R.id.container) LinearLayout mContainer;
+    @BindView(R.id.btn_signup_1) Button signupButton;
+    @BindView(R.id.btn_signin_2) Button signinButton;
+    @BindView(R.id.et_username_1) EditText usernameEditText;
+    @BindView(R.id.et_password_1) EditText passwordEditText;
+    @BindView(R.id.btn_back_1) Button backButton;
+
     private AnimationDrawable anim;
-    private Button signupButton,signinButton,backButton;
-    private EditText usernameEditText,passwordEditText;
     private ProgressDialog progressDialog;
 
     @Override
@@ -41,10 +49,10 @@ public class SigninFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.signin_layout,
+        View signinLayout = inflater.inflate(R.layout.signin_layout,
                 container, false);
 
-        initViews(view);
+        ButterKnife.bind(this, signinLayout);
 
         anim = (AnimationDrawable) mContainer.getBackground();
         anim.setEnterFadeDuration(6000);
@@ -104,17 +112,7 @@ public class SigninFragment extends Fragment{
             }
         });
 
-        return view;
-    }
-
-    private void initViews(View view){
-
-        mContainer = (LinearLayout) view.findViewById(R.id.container);
-        signupButton = (Button) view.findViewById(R.id.btn_signup_1);
-        signinButton = (Button) view.findViewById(R.id.btn_signin_2);
-        usernameEditText = (EditText) view.findViewById(R.id.et_username_1);
-        passwordEditText = (EditText) view.findViewById(R.id.et_password_1);
-        backButton = (Button) view.findViewById(R.id.btn_back_1);
+        return signinLayout;
     }
 
     @Override
@@ -123,7 +121,6 @@ public class SigninFragment extends Fragment{
         if (anim != null && !anim.isRunning())
             anim.start();
     }
-
 
     @Override
     public void onPause() {
@@ -134,8 +131,6 @@ public class SigninFragment extends Fragment{
             progressDialog.dismiss();
             progressDialog = null; }
     }
-
-
 
 
 }

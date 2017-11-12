@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -24,10 +26,18 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser;
 
 public class SignupFragment extends Fragment {
 
-    private LinearLayout mContainer;
+    /**
+     * Butter Knife
+     */
+    @BindView(R.id.container) LinearLayout mContainer;
+    @BindView(R.id.et_username_2) EditText usernameEditText;
+    @BindView(R.id.et_password_2) EditText  passwordEditText;
+    @BindView(R.id.et_password_confirm) EditText passwordConfirmEditText;
+    @BindView(R.id.et_email) EditText emailEditText;
+    @BindView(R.id.btn_signup_2) Button signupButton;
+    @BindView(R.id.btn_back_2) Button backButton;
+
     private AnimationDrawable anim;
-    private EditText usernameEditText,passwordEditText,passwordConfirmEditText,emailEditText;
-    private Button signupButton,backButton;
     private BmobUser bu;
     private ProgressDialog progressDialog;
 
@@ -40,10 +50,10 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.signup_layout,
+        View signupLayout = inflater.inflate(R.layout.signup_layout,
                 container, false);
 
-        initViews(view);
+        ButterKnife.bind(this, signupLayout);
 
         anim = (AnimationDrawable) mContainer.getBackground();
         anim.setEnterFadeDuration(6000);
@@ -52,8 +62,6 @@ public class SignupFragment extends Fragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
@@ -113,19 +121,7 @@ public class SignupFragment extends Fragment {
             }
         });
 
-        return view;
-    }
-
-    private void initViews(View view){
-
-        mContainer = (LinearLayout) view.findViewById(R.id.container);
-        usernameEditText = (EditText) view.findViewById(R.id.et_username_2);
-        passwordEditText = (EditText) view.findViewById(R.id.et_password_2);
-        passwordConfirmEditText = (EditText) view.findViewById(R.id.et_password_confirm);
-        emailEditText = (EditText) view.findViewById(R.id.et_email);
-        signupButton = (Button) view.findViewById(R.id.btn_signup_2);
-        backButton = (Button) view.findViewById(R.id.btn_back_2);
-
+        return signupLayout;
     }
 
     @Override

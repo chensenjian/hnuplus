@@ -10,6 +10,8 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
 
 /**
@@ -17,6 +19,22 @@ import cn.bmob.v3.Bmob;
  *
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    /**
+     * Butter Knife
+     */
+    @BindView(R.id.hot_layout)  View hotLayout;
+    @BindView(R.id.contacts_layout)  View contactsLayout;
+    @BindView(R.id.news_layout)  View newsLayout;
+    @BindView(R.id.user_layout)  View userLayout;
+    @BindView(R.id.hot_image)  ImageView hotImage;
+    @BindView(R.id.contacts_image)  ImageView contactsImage;
+    @BindView(R.id.news_image)  ImageView newsImage;
+    @BindView(R.id.user_image)  ImageView userImage;
+    @BindView(R.id.hot_text)  TextView hotText;
+    @BindView(R.id.contacts_text)  TextView contactsText;
+    @BindView(R.id.news_text)  TextView newsText;
+    @BindView(R.id.user_text)  TextView userText;
 
     /**
      * 用于展示热点的Fragment
@@ -39,66 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private UserFragment userFragment;
 
     /**
-     * 消息界面布局
-     */
-    private View hotLayout;
-
-    /**
-     * 联系人界面布局
-     */
-    private View contactsLayout;
-
-    /**
-     * 动态界面布局
-     */
-    private View newsLayout;
-
-    /**
-     * 设置界面布局
-     */
-    private View userLayout;
-
-    /**
-     * 在Tab布局上显示消息图标的控件
-     */
-    private ImageView hotImage;
-
-    /**
-     * 在Tab布局上显示联系人图标的控件
-     */
-    private ImageView contactsImage;
-
-    /**
-     * 在Tab布局上显示动态图标的控件
-     */
-    private ImageView newsImage;
-
-    /**
-     * 在Tab布局上显示设置图标的控件
-     */
-    private ImageView userImage;
-
-    /**
-     * 在Tab布局上显示消息标题的控件
-     */
-    private TextView hotText;
-
-    /**
-     * 在Tab布局上显示联系人标题的控件
-     */
-    private TextView contactsText;
-
-    /**
-     * 在Tab布局上显示动态标题的控件
-     */
-    private TextView newsText;
-
-    /**
-     * 在Tab布局上显示设置标题的控件
-     */
-    private TextView userText;
-
-    /**
      * 用于对Fragment进行管理
      */
     private FragmentManager fragmentManager;
@@ -113,28 +71,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bmob.initialize(this, "a15e40755375ee7434e6be8c000c184b");
 
         // 初始化布局元素
-        initViews();
+        ButterKnife.bind(this);
+        bindListener();
         fragmentManager = getSupportFragmentManager();
         // 第一次启动时选中第0个tab
         setTabSelection(0);
     }
 
-    /**
-     * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
-     */
-    private void initViews() {
-        hotLayout = findViewById(R.id.hot_layout);
-        contactsLayout = findViewById(R.id.contacts_layout);
-        newsLayout = findViewById(R.id.news_layout);
-        userLayout = findViewById(R.id.user_layout);
-        hotImage = (ImageView) findViewById(R.id.hot_image);
-        contactsImage = (ImageView) findViewById(R.id.contacts_image);
-        newsImage = (ImageView) findViewById(R.id.news_image);
-        userImage = (ImageView) findViewById(R.id.user_image);
-        hotText = (TextView) findViewById(R.id.hot_text);
-        contactsText = (TextView) findViewById(R.id.contacts_text);
-        newsText = (TextView) findViewById(R.id.news_text);
-        userText = (TextView) findViewById(R.id.user_text);
+    private void bindListener(){
         hotLayout.setOnClickListener(this);
         contactsLayout.setOnClickListener(this);
         newsLayout.setOnClickListener(this);
@@ -275,9 +219,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         super.onStop();
     }
-
-
-
-
 
 }

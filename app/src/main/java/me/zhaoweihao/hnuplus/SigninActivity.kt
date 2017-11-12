@@ -38,7 +38,6 @@ class SigninActivity : AppCompatActivity() {
         }
         transaction.commit()
 
-
     }
 
     public fun toSignupFragment(){

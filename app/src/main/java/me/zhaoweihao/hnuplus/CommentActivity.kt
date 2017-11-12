@@ -1,15 +1,11 @@
 package me.zhaoweihao.hnuplus
 
-import android.app.Activity
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.widget.EditText
 import android.widget.ImageView
 import me.zhaoweihao.hnuplus.Interface.MyInterface
-
-
 
 class CommentActivity : AppCompatActivity() {
 
@@ -42,7 +38,6 @@ class CommentActivity : AppCompatActivity() {
         initViews()
 
         commentImageView!!.setOnClickListener { listener!!.myAction(commentEditText!!.text.toString()) }
-
 
     }
 

@@ -1,7 +1,6 @@
 package me.zhaoweihao.hnuplus;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +20,8 @@ import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
@@ -41,31 +41,33 @@ import me.zhaoweihao.hnuplus.JavaBean.Post;
 
 public class CommentFragment extends Fragment implements MyInterface{
 
-    private RecyclerView recyclerView;
+    /**
+     * Butter Knife
+     */
+    @BindView(R.id.rv_comments) RecyclerView recyclerView;
+    @BindView(R.id.tv_comment_author) TextView commentAuthorTextView;
+    @BindView(R.id.tv_comment_content) TextView commentContentTextView;
+    @BindView(R.id.fl_delete) FrameLayout deleteFrameLayout;
+
     private LinearLayoutManager layoutManager;
     private CommentAdapter adapter;
-    private TextView commentAuthorTextView,commentContentTextView;
     private ProgressDialog progressDialog;
     private String objectID,authorObjectID;
-    private FrameLayout deleteFrameLayout;
     private MyUser user;
-    public static final String TAG = "CommentFragment";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG,"onCreate");
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.comment_layout,
+        View commentLayout = inflater.inflate(R.layout.comment_layout,
                 container, false);
-        Log.d(TAG,"onCreateView");
 
-        initViews(view);
+        ButterKnife.bind(this, commentLayout);
 
         user = BmobUser.getCurrentUser(MyUser.class);
 
@@ -74,7 +76,6 @@ public class CommentFragment extends Fragment implements MyInterface{
         commentContentTextView.setText(intent.getStringExtra("content"));
         objectID = intent.getStringExtra("objectID");
         authorObjectID = intent.getStringExtra("authorObjectID");
-
 
         if(user == null){
             deleteFrameLayout.setVisibility(View.GONE);
@@ -120,7 +121,6 @@ public class CommentFragment extends Fragment implements MyInterface{
 
                 dialog.show();
 
-
             }
         });
 
@@ -131,17 +131,9 @@ public class CommentFragment extends Fragment implements MyInterface{
 
         refreshCommentData(objectID);
 
-        return view;
+        return commentLayout;
     }
 
-    private void initViews(View view){
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_comments);
-        commentAuthorTextView = (TextView) view.findViewById(R.id.tv_comment_author);
-        commentContentTextView = (TextView) view.findViewById(R.id.tv_comment_content);
-        deleteFrameLayout = (FrameLayout) view.findViewById(R.id.fl_delete);
-
-    }
 
     private void refreshCommentData(String objectID){
 
@@ -159,7 +151,6 @@ public class CommentFragment extends Fragment implements MyInterface{
                     progressDialog.hide();
                 }else{
                 Collections.reverse(objects);
-//                Toast.makeText(getActivity(), objects.get(0).getUser().getUsername(), Toast.LENGTH_SHORT).show();
                 layoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(layoutManager);
                 adapter = new CommentAdapter(objects);
@@ -170,8 +161,6 @@ public class CommentFragment extends Fragment implements MyInterface{
     }
 
     public void myAction(String data) {
-
-
 
         if(user==null){
 
@@ -220,59 +209,12 @@ public class CommentFragment extends Fragment implements MyInterface{
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG,"onStart");
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG,"onAttach");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG,"onActivityCreated");
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null; }
-        Log.d(TAG,"onPause");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG,"onResume");
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG,"onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG,"onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG,"onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG,"onDetach");
-    }
 }
