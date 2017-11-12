@@ -23,14 +23,14 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser;
  * Created by Administrator on 2017/11/9.
  */
 
-public class SettingFragment extends Fragment {
+public class UserFragment extends Fragment {
 
     private Button signinButton,signoutButton;
     private TextView signinStatusTextView;
     private MyUser userInfo;
     private ProgressDialog progressDialog;
 
-    public static final String TAG = "SettingFragment";
+    public static final String TAG = "UserFragment";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

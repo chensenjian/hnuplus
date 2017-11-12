@@ -35,7 +35,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by Administrator on 2017/11/9.
  */
 
-public class MessageFragment extends Fragment  {
+public class HotFragment extends Fragment  {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
@@ -53,12 +53,11 @@ public class MessageFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View messageLayout = inflater.inflate(R.layout.hot_layout,
+
+        View hotLayout = inflater.inflate(R.layout.hot_layout,
                 container, false);
 
-        initViews(messageLayout);
-
-
+        initViews(hotLayout);
 
         refreshRecyclerView();
 
@@ -104,7 +103,7 @@ public class MessageFragment extends Fragment  {
             }
         });
 
-        return messageLayout;
+        return hotLayout;
     }
 
     private void initViews(View view){
@@ -143,14 +142,6 @@ public class MessageFragment extends Fragment  {
 
     }
 
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-//        refreshRecyclerView();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
@@ -186,7 +177,5 @@ public class MessageFragment extends Fragment  {
             default:
         }
     }
-
-
 
 }

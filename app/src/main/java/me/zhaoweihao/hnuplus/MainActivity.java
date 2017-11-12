@@ -15,14 +15,13 @@ import cn.bmob.v3.Bmob;
 /**
  * 项目的主Activity，所有的Fragment都嵌入在这里。
  *
- * @author guolin
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
-     * 用于展示消息的Fragment
+     * 用于展示热点的Fragment
      */
-    private MessageFragment messageFragment;
+    private HotFragment hotFragment;
 
     /**
      * 用于展示联系人的Fragment
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 用于展示设置的Fragment
      */
-    private SettingFragment settingFragment;
+    private UserFragment userFragment;
 
     /**
      * 消息界面布局
      */
-    private View messageLayout;
+    private View hotLayout;
 
     /**
      * 联系人界面布局
@@ -57,12 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 设置界面布局
      */
-    private View settingLayout;
+    private View userLayout;
 
     /**
      * 在Tab布局上显示消息图标的控件
      */
-    private ImageView messageImage;
+    private ImageView hotImage;
 
     /**
      * 在Tab布局上显示联系人图标的控件
@@ -77,12 +76,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 在Tab布局上显示设置图标的控件
      */
-    private ImageView settingImage;
+    private ImageView userImage;
 
     /**
      * 在Tab布局上显示消息标题的控件
      */
-    private TextView messageText;
+    private TextView hotText;
 
     /**
      * 在Tab布局上显示联系人标题的控件
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 在Tab布局上显示设置标题的控件
      */
-    private TextView settingText;
+    private TextView userText;
 
     /**
      * 用于对Fragment进行管理
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Bmob.initialize(this, "a15e40755375ee7434e6be8c000c184b");
 
-
         // 初始化布局元素
         initViews();
         fragmentManager = getSupportFragmentManager();
@@ -125,28 +123,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
      */
     private void initViews() {
-        messageLayout = findViewById(R.id.message_layout);
+        hotLayout = findViewById(R.id.hot_layout);
         contactsLayout = findViewById(R.id.contacts_layout);
         newsLayout = findViewById(R.id.news_layout);
-        settingLayout = findViewById(R.id.setting_layout);
-        messageImage = (ImageView) findViewById(R.id.message_image);
+        userLayout = findViewById(R.id.user_layout);
+        hotImage = (ImageView) findViewById(R.id.hot_image);
         contactsImage = (ImageView) findViewById(R.id.contacts_image);
         newsImage = (ImageView) findViewById(R.id.news_image);
-        settingImage = (ImageView) findViewById(R.id.setting_image);
-        messageText = (TextView) findViewById(R.id.message_text);
+        userImage = (ImageView) findViewById(R.id.user_image);
+        hotText = (TextView) findViewById(R.id.hot_text);
         contactsText = (TextView) findViewById(R.id.contacts_text);
         newsText = (TextView) findViewById(R.id.news_text);
-        settingText = (TextView) findViewById(R.id.setting_text);
-        messageLayout.setOnClickListener(this);
+        userText = (TextView) findViewById(R.id.user_text);
+        hotLayout.setOnClickListener(this);
         contactsLayout.setOnClickListener(this);
         newsLayout.setOnClickListener(this);
-        settingLayout.setOnClickListener(this);
+        userLayout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.message_layout:
+            case R.id.hot_layout:
                 // 当点击了消息tab时，选中第1个tab
                 setTabSelection(0);
                 break;
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 当点击了动态tab时，选中第3个tab
                 setTabSelection(2);
                 break;
-            case R.id.setting_layout:
+            case R.id.user_layout:
                 // 当点击了设置tab时，选中第4个tab
                 setTabSelection(3);
                 break;
@@ -183,15 +181,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (index) {
             case 0:
                 // 当点击了消息tab时，改变控件的图片和文字颜色
-                messageImage.setImageResource(R.drawable.ic_home_black_24dp);
-                messageText.setTextColor(Color.WHITE);
-                if (messageFragment == null) {
-                    // 如果MessageFragment为空，则创建一个并添加到界面上
-                    messageFragment = new MessageFragment();
-                    transaction.add(R.id.content, messageFragment);
+                hotImage.setImageResource(R.drawable.ic_home_black_24dp);
+                hotText.setTextColor(Color.WHITE);
+                if (hotFragment == null) {
+                    // 如果HotFragment为空，则创建一个并添加到界面上
+                    hotFragment = new HotFragment();
+                    transaction.add(R.id.content, hotFragment);
                 } else {
-                    // 如果MessageFragment不为空，则直接将它显示出来
-                    transaction.show(messageFragment);
+                    // 如果HotFragment不为空，则直接将它显示出来
+                    transaction.show(hotFragment);
                 }
                 break;
             case 1:
@@ -223,15 +221,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 3:
             default:
                 // 当点击了设置tab时，改变控件的图片和文字颜色
-                settingImage.setImageResource(R.drawable.ic_home_black_24dp);
-                settingText.setTextColor(Color.WHITE);
-                if (settingFragment == null) {
-                    // 如果SettingFragment为空，则创建一个并添加到界面上
-                    settingFragment = new SettingFragment();
-                    transaction.add(R.id.content, settingFragment);
+                userImage.setImageResource(R.drawable.ic_home_black_24dp);
+                userText.setTextColor(Color.WHITE);
+                if (userFragment == null) {
+                    // 如果userFragment为空，则创建一个并添加到界面上
+                    userFragment = new UserFragment();
+                    transaction.add(R.id.content, userFragment);
                 } else {
-                    // 如果SettingFragment不为空，则直接将它显示出来
-                    transaction.show(settingFragment);
+                    // 如果userFragment不为空，则直接将它显示出来
+                    transaction.show(userFragment);
                 }
                 break;
         }
@@ -242,14 +240,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 清除掉所有的选中状态。
      */
     private void clearSelection() {
-        messageImage.setImageResource(R.drawable.ic_home_grey_24dp);
-        messageText.setTextColor(Color.parseColor("#82858b"));
+        hotImage.setImageResource(R.drawable.ic_home_grey_24dp);
+        hotText.setTextColor(Color.parseColor("#82858b"));
         contactsImage.setImageResource(R.drawable.ic_home_grey_24dp);
         contactsText.setTextColor(Color.parseColor("#82858b"));
         newsImage.setImageResource(R.drawable.ic_home_grey_24dp);
         newsText.setTextColor(Color.parseColor("#82858b"));
-        settingImage.setImageResource(R.drawable.ic_home_grey_24dp);
-        settingText.setTextColor(Color.parseColor("#82858b"));
+        userImage.setImageResource(R.drawable.ic_home_grey_24dp);
+        userText.setTextColor(Color.parseColor("#82858b"));
     }
 
     /**
@@ -259,8 +257,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *            用于对Fragment执行操作的事务
      */
     private void hideFragments(FragmentTransaction transaction) {
-        if (messageFragment != null) {
-            transaction.hide(messageFragment);
+        if (hotFragment != null) {
+            transaction.hide(hotFragment);
         }
         if (contactsFragment != null) {
             transaction.hide(contactsFragment);
@@ -268,8 +266,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (newsFragment != null) {
             transaction.hide(newsFragment);
         }
-        if (settingFragment != null) {
-            transaction.hide(settingFragment);
+        if (userFragment != null) {
+            transaction.hide(userFragment);
         }
     }
 
