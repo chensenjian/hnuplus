@@ -40,7 +40,7 @@ class SigninActivity : AppCompatActivity() {
 
     }
 
-    public fun toSignupFragment(){
+    open fun toSignupFragment(){
 
         // 开启一个Fragment事务
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
