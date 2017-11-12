@@ -26,7 +26,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private Context mContext;
     private List<Post> mPostList;
 
-
     static class ViewHolder extends RecyclerView.ViewHolder{
 
         View postView;

@@ -14,10 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
 
-/**
- * 项目的主Activity，所有的Fragment都嵌入在这里。
- *
- */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
@@ -37,23 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.user_text)  TextView userText;
 
     /**
-     * 用于展示热点的Fragment
+     * 用于展示的四个Fragment
      */
     private HotFragment hotFragment;
-
-    /**
-     * 用于展示联系人的Fragment
-     */
     private ContactsFragment contactsFragment;
-
-    /**
-     * 用于展示动态的Fragment
-     */
     private NewsFragment newsFragment;
-
-    /**
-     * 用于展示设置的Fragment
-     */
     private UserFragment userFragment;
 
     /**
@@ -111,9 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 根据传入的index参数来设置选中的tab页。
-     *
-     * @param index
-     *            每个tab页对应的下标。0表示消息，1表示联系人，2表示动态，3表示设置。
      */
     private void setTabSelection(int index) {
         // 每次选中之前先清楚掉上次的选中状态
@@ -196,9 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 将所有的Fragment都置为隐藏状态。
-     *
-     * @param transaction
-     *            用于对Fragment执行操作的事务
      */
     private void hideFragments(FragmentTransaction transaction) {
         if (hotFragment != null) {
@@ -213,11 +191,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (userFragment != null) {
             transaction.hide(userFragment);
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
 }
