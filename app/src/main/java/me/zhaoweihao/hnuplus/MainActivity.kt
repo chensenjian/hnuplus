@@ -5,13 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
-
-import butterknife.BindView
-import butterknife.ButterKnife
 import cn.bmob.v3.Bmob
 import kotlinx.android.synthetic.main.activity_main.*
 
