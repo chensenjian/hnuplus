@@ -37,6 +37,11 @@ import static android.app.Activity.RESULT_OK;
  * Created by Administrator on 2017/11/9.
  */
 
+/**
+ * Because of the bmob sdk
+ * I can't convert this fragment to kotlin lang
+ */
+
 public class HotFragment extends Fragment  {
 
     /**

@@ -25,6 +25,11 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2017/11/10.
  */
 
+/**
+ * Because of the bmob sdk
+ * I can't convert this fragment to kotlin lang
+ */
+
 public class SigninFragment extends Fragment{
 
     /**

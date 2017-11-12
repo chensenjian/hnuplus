@@ -12,7 +12,7 @@ import me.zhaoweihao.hnuplus.JavaBean.Comment
 import me.zhaoweihao.hnuplus.R
 
 /**
- * Created by Administrator on 2017/11/10.
+ * Created by zhaoweihaoChina on 2017/11/10.
  */
 
 class CommentAdapter(private val mCommentList: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
