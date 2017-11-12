@@ -18,11 +18,9 @@ class PostFragment :  Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         val postLayout = inflater!!.inflate(R.layout.post_layout, container,
                 false)
         return postLayout
-
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
