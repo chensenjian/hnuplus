@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import me.zhaoweihao.hnuplus.JavaBean.Comment;
 import me.zhaoweihao.hnuplus.R;
 
@@ -21,13 +23,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView commentatorName,commentatorContent;
+        /**
+         * Butter Knife
+         */
+        @BindView(R.id.tv_commentator_name) TextView commentatorName;
+        @BindView(R.id.tv_commentator_content) TextView commentatorContent;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
-            commentatorName = (TextView) itemView.findViewById(R.id.tv_commentator_name);
-            commentatorContent = (TextView) itemView.findViewById(R.id.tv_commentator_content);
+            ButterKnife.bind(this, itemView);
 
         }
     }

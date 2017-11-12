@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import me.zhaoweihao.hnuplus.CommentActivity;
 import me.zhaoweihao.hnuplus.JavaBean.Post;
 import me.zhaoweihao.hnuplus.MainActivity;
@@ -27,15 +29,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView postAuthor,postContent;
         View postView;
+
+        /**
+         * Butter Knife
+         */
+        @BindView(R.id.tv_author) TextView postAuthor;
+        @BindView(R.id.tv_content) TextView postContent;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            postAuthor = (TextView) itemView.findViewById(R.id.tv_author);
-            postContent = (TextView) itemView.findViewById(R.id.tv_content);
+            ButterKnife.bind(this, itemView);
             postView = itemView;
-
 
         }
     }
@@ -59,7 +64,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Post post = mPostList.get(position);
-//                Toast.makeText(v.getContext(),post.getContent()+post.getObjectId(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(mContext,CommentActivity.class);
 
                     intent.putExtra("author",post.getAuthor().getUsername());
