@@ -63,7 +63,6 @@ public class CommentFragment extends Fragment implements MyInterface{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
