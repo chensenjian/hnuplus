@@ -1,9 +1,6 @@
 package me.zhaoweihao.hnuplus
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.insert
 
 import android.support.v4.app.Fragment
 
@@ -39,8 +36,11 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         /*
-        using kotlin-android-extensions in fragment
-        thanks to this post:https://antonioleiva.com/kotlin-android-extensions/
+        using kotlin-anko-sqlite & kotlin-android-extensions in fragment
+        thanks to those posts:
+        http://blog.csdn.net/cysion1989/article/details/72903002
+        https://antonioleiva.com/databases-anko-kotlin/
+        https://antonioleiva.com/kotlin-android-extensions/
          */
         insert.setOnClickListener {
             activity.database.use {
