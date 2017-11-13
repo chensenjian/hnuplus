@@ -2,7 +2,6 @@ package me.zhaoweihao.hnuplus
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,12 +13,8 @@ import android.view.ViewGroup
 
 import android.widget.Toast
 
-import com.yalantis.phoenix.PullToRefreshView
-
 import java.util.Collections
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
@@ -30,9 +25,7 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 
 import android.app.Activity.RESULT_OK
-import com.github.florent37.viewtooltip.ViewTooltip
 import kotlinx.android.synthetic.main.hot_layout.*
-import kotlinx.android.synthetic.main.post_layout.*
 
 /**
  * Created by Administrator on 2017/11/9.
