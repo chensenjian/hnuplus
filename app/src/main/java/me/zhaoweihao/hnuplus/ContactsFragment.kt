@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.contacts_layout.*
+import me.zhaoweihao.hnuplus.DB.Person
 import me.zhaoweihao.hnuplus.SQL.database
 import org.jetbrains.anko.attempt
 import org.jetbrains.anko.db.*
@@ -28,7 +29,6 @@ class ContactsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val contactsLayout = inflater!!.inflate(R.layout.contacts_layout, container, false)
-
 
         return contactsLayout
     }
@@ -68,21 +68,6 @@ class ContactsFragment : Fragment() {
                     display.text = "错误,可能不存在表"
                 }
             }
-        }
-
-        create.setOnClickListener {
-            activity.database.use {
-                if(attempt {
-                    createTable("Person", true, "id" to INTEGER + PRIMARY_KEY + UNIQUE,
-                            "name" to TEXT,
-                            "age" to INTEGER,
-                            "address" to TEXT)
-                    display.text = "create successfully"
-                }.isError){
-                    display.text = "错误,可能不存在表"
-                }
-            }
-
         }
 
     }

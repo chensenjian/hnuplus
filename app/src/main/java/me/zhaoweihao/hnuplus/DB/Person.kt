@@ -1,4 +1,4 @@
-package me.zhaoweihao.hnuplus
+package me.zhaoweihao.hnuplus.DB
 
 /**
  * Created by Administrator on 2017/11/13.
