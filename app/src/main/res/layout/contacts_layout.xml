@@ -16,12 +16,35 @@
             android:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
             android:text="It will be something in the future"
             android:textSize="20sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/insert"
+        android:text="insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/query"
+        android:text="query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/create"
+            android:text="create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </RelativeLayout>

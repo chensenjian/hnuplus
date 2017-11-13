@@ -70,7 +70,7 @@ public class HotFragment extends Fragment  {
 
         ButterKnife.bind(this, hotLayout);
 
-        refreshRecyclerView();
+//        refreshRecyclerView();
 
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
