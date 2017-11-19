@@ -25,10 +25,6 @@ class PostFragment :  Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*
-        using kotlin-android-extensions in fragment
-        thanks to this post:https://antonioleiva.com/kotlin-android-extensions/
-         */
         ViewTooltip
                 .on(et_post)
                 .autoHide(true,3000)
@@ -36,7 +32,6 @@ class PostFragment :  Fragment() {
                 .position(ViewTooltip.Position.BOTTOM)
                 .text("Share what you see today")
                 .show()
-
         btn_submit!!.setOnClickListener {
             val intent = Intent()
             intent.putExtra("data_return", et_post?.text.toString())

@@ -17,27 +17,20 @@ class CommentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comment)
 
         fragmentManager = supportFragmentManager
-
-        // 开启一个Fragment事务
+        // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
-
         if (commentFragment == null) {
-            // 如果MessageFragment为空，则创建一个并添加到界面上
+            // If Message Fragment is empty, create one and add to the screen
             commentFragment = CommentFragment()
             setListener(commentFragment!!)
             transaction.add(R.id.fl_comment, commentFragment)
         } else {
-            // 如果MessageFragment不为空，则直接将它显示出来
+            // If MessageFragment is not empty, it will be displayed directly
             transaction.show(commentFragment)
         }
         transaction.commit()
 
-        /*
-        using kotlin-android-extensions in activity
-        thanks to this post:https://stackoverflow.com/questions/42453010/android-kotlin-with-butterknife
-         */
         iv_comment!!.setOnClickListener { listener!!.myAction(et_comment!!.text.toString()) }
-
     }
 
     fun setListener(listener: MyInterface) {
