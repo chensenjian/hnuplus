@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,17 +41,10 @@ class HotFragment : Fragment() {
     private var adapter: PostAdapter? = null
     private var userInfo: MyUser? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         val hotLayout = inflater!!.inflate(R.layout.hot_layout,
                 container, false)
-
         return hotLayout
     }
 
@@ -64,12 +56,15 @@ class HotFragment : Fragment() {
         pull_to_refresh!!.setOnRefreshListener { loadData() }
 
         fb!!.setOnClickListener {
+            //get local user data information
             userInfo = BmobUser.getCurrentUser(MyUser::class.java)
-
+            //if userinfo is null,it means you did not sign in
             if (userInfo != null) {
+                //we will get data from PostActivity
                 val intent = Intent(activity, PostActivity::class.java)
                 startActivityForResult(intent, 1)
             } else {
+                //show a snackbar to tell you to sign in
                 Snackbar.make(fb!!, "You are not signin", Snackbar.LENGTH_SHORT)
                         .setAction("Sign in") {
                             val intent = Intent(activity, SigninActivity::class.java)
@@ -81,6 +76,7 @@ class HotFragment : Fragment() {
 
         rv_posts!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                //show or hide floating button when scroll the recyclerview
                 if (dy > 0)
                     fb!!.hide()
                 else if (dy < 0)
@@ -90,9 +86,16 @@ class HotFragment : Fragment() {
 
     }
 
+    /**
+     * show data on recyclerview
+     * @networkCode 1 -> online
+     *              0 -> offline
+     */
+
     private fun refreshRecyclerView(networkCode: Int) {
 
         when (networkCode) {
+            //query data via bmob sdk
             1 -> {
                 pull_to_refresh!!.setRefreshing(true)
                 val query = BmobQuery<Post>()
@@ -103,7 +106,7 @@ class HotFragment : Fragment() {
                     override fun done(`object`: List<Post>, e: BmobException?) {
                         if (e == null) {
                             Collections.reverse(`object`)
-
+                            //save the data to shareprefs in case of network offline status
                             saveListToPrefs(`object`)
 
                             layoutManager = LinearLayoutManager(activity)
@@ -114,18 +117,18 @@ class HotFragment : Fragment() {
                             pull_to_refresh!!.setRefreshing(false)
 
                         } else {
-                            Log.i("bmob", "失败：" + e.message)
+                            Snackbar.make(rv_posts!!, "refresh failed", Snackbar.LENGTH_SHORT).show()
+                            pull_to_refresh!!.setRefreshing(false)
                         }
                     }
 
                 })}
+            //show data from shareprefs
             0 -> {
-                Log.d("HF","you are offline")
                 val appSharedPrefs = PreferenceManager
                         .getDefaultSharedPreferences(activity.getApplicationContext())
                 val gson = Gson()
                 val json = appSharedPrefs.getString("MyObject", "")
-
                 val type = object : TypeToken<List<Post>>() {
                 }.type
                 val postList: List<Post> = gson.fromJson(json,type)
@@ -171,13 +174,14 @@ class HotFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-
+            //receive data from PostActivity
             1 -> if (resultCode == RESULT_OK) {
                 val returnedData = data!!.getStringExtra("data_return")
-
+                //check the receive data is empty or not
                 if (returnedData == "") {
                     Toast.makeText(activity, "empty text", Toast.LENGTH_SHORT).show()
                 } else {
+                    //send data to server via bmob sdk
                     val user = BmobUser.getCurrentUser(MyUser::class.java)
                     val post = Post()
                     post.content = returnedData

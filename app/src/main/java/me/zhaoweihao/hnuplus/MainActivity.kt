@@ -18,7 +18,7 @@ import me.zhaoweihao.hnuplus.Constant.Constant
 class MainActivity : AppCompatActivity(){
 
     /**
-     * 用于展示的四个Fragment
+     * Four Fragment for display
      */
     private var hotFragment: HotFragment? = null
     private var contactsFragment: ContactsFragment? = null
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(){
     private var userFragment: UserFragment? = null
 
     /**
-     * 用于对Fragment进行管理
+     * Used to manage Fragment
      */
     private var fragmentManager: FragmentManager? = null
 
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(){
         fragmentManager = supportFragmentManager
 
         // select 0 tab when first run
+
         setTabSelection(0)
     }
 
@@ -53,26 +54,26 @@ class MainActivity : AppCompatActivity(){
     }
 
     /**
-     * 根据传入的index参数来设置选中的tab页。
+     * Set the selected tab page based on the index parameter passed in
      */
     private fun setTabSelection(index: Int) {
-        // 每次选中之前先清楚掉上次的选中状态
+        // Clear the last selected state before each selection
         clearSelection()
-        // 开启一个Fragment事务
+        // Open a Fragment transaction
         val transaction = fragmentManager!!.beginTransaction()
-        // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
+        // Hide all the Fragment first to prevent multiple Fragment displayed on the screen
         hideFragments(transaction)
         when (index) {
             0 -> {
-                // 当点击了消息tab时，改变控件的图片和文字颜色
+                // When you click the message tab, change the tab's picture and text color
                 hot_image!!.setImageResource(R.drawable.ic_home_black_24dp)
                 hot_text!!.setTextColor(Color.WHITE)
                 if (hotFragment == null) {
-                    // 如果HotFragment为空，则创建一个并添加到界面上
+                    // If Hot Fragment is empty, create one and add to the screen
                     hotFragment = HotFragment()
                     transaction.add(R.id.content, hotFragment)
                 } else {
-                    // 如果HotFragment不为空，则直接将它显示出来
+                    // If Hot Fragment is not empty, it will be displayed directly
                     transaction.show(hotFragment)
                 }
             }
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     /**
-     * 清除掉所有的选中状态。
+     * Clear all the selected state
      */
     private fun clearSelection() {
         hot_image!!.setImageResource(R.drawable.ic_home_grey_24dp)
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     /**
-     * 将所有的Fragment都置为隐藏状态。
+     * Hide all the Fragments
      */
     private fun hideFragments(transaction: FragmentTransaction) {
         if (hotFragment != null) {
