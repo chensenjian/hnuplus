@@ -24,11 +24,14 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 
 import android.app.Activity.RESULT_OK
+import android.net.Uri
 
 import android.preference.PreferenceManager
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.yoavst.kotlin.`KotlinPackage$SystemServices$69d7d2d0`.connectivityManager
+import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.hot_layout.*
 
 /**
@@ -51,7 +54,7 @@ class HotFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadData()
+//        loadData()
 
         pull_to_refresh!!.setOnRefreshListener { loadData() }
 
@@ -198,6 +201,11 @@ class HotFragment : Fragment() {
                         }
                     })
                 }
+            }
+
+            0 -> if (resultCode == RESULT_OK) {
+                val mSelected: List<Uri> = Matisse.obtainResult(data)
+                Log.d("Matisse", "mSelected: " + mSelected)
             }
         }
     }

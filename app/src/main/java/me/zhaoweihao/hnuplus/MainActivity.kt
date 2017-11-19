@@ -1,5 +1,6 @@
 package me.zhaoweihao.hnuplus
 
+
 import android.graphics.Color
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -14,7 +15,6 @@ import me.zhaoweihao.hnuplus.Constant.Constant
  * Created by zhaoweihaoChina on 2017/11/9.
  * github:https://github.com/zhaoweihaoChina
  */
-
 class MainActivity : AppCompatActivity(){
 
     /**
@@ -142,5 +142,6 @@ class MainActivity : AppCompatActivity(){
             transaction.hide(userFragment)
         }
     }
+
 
 }
