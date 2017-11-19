@@ -1,13 +1,18 @@
 package me.zhaoweihao.hnuplus
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 
 import android.support.v4.app.Fragment
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.contacts_layout.*
+import me.zhaoweihao.hnuplus.JavaBean.Post
 
 
 /**
@@ -30,6 +35,18 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btn1.setOnClickListener {
+            val appSharedPrefs = PreferenceManager
+                    .getDefaultSharedPreferences(activity.getApplicationContext())
+            val gson = Gson()
+            val json = appSharedPrefs.getString("MyObject", "")
+
+            val type = object : TypeToken<List<Post>>() {
+            }.type
+            val postList: List<Post> = gson.fromJson(json,type)
+            Log.d("CF", postList[0].content+postList.size.toString())
+        }
 
     }
 

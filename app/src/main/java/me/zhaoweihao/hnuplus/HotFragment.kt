@@ -25,6 +25,8 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 
 import android.app.Activity.RESULT_OK
+import android.preference.PreferenceManager
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.hot_layout.*
 
 /**
@@ -96,6 +98,18 @@ class HotFragment : Fragment() {
             override fun done(`object`: List<Post>, e: BmobException?) {
                 if (e == null) {
                     Collections.reverse(`object`)
+
+                    Log.d("HF",`object`.size.toString())
+
+                    val appSharedPrefs = PreferenceManager
+                            .getDefaultSharedPreferences(activity.applicationContext)
+                    val prefsEditor = appSharedPrefs.edit()
+                    val gson = Gson()
+                    val json = gson.toJson(`object`)
+
+                    prefsEditor.putString("MyObject", json)
+                    prefsEditor.commit()
+
                     //                    Toast.makeText(getActivity(),Integer.toString(object.size()), Toast.LENGTH_SHORT).show();
                     layoutManager = LinearLayoutManager(activity)
                     rv_posts!!.layoutManager = layoutManager
@@ -112,6 +126,7 @@ class HotFragment : Fragment() {
         })
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
