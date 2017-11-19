@@ -4,21 +4,32 @@ package me.zhaoweihao.hnuplus
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import cn.bmob.v3.Bmob
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
+import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.activity_main.*
 import me.zhaoweihao.hnuplus.Constant.Constant
 import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
+import cn.bmob.v3.listener.UploadFileListener
+import cn.bmob.v3.datatype.BmobFile
+import org.jetbrains.anko.toast
+import java.io.File
+import java.net.URI
+import android.provider.MediaStore
+import android.R.attr.data
+
 
 
 
@@ -42,6 +53,14 @@ class MainActivity : AppCompatActivity(){
     private var fragmentManager: FragmentManager? = null
 
     private var listener: AnotherInterface? = null
+
+    private var mSelected: List<Uri>? =null
+
+    private var yourRealPath: String? =null
+
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -195,11 +214,47 @@ class MainActivity : AppCompatActivity(){
             }
 
             2 -> if (resultCode == RESULT_OK){
+
                 Toast.makeText(this@MainActivity,"select successfully",Toast.LENGTH_SHORT).show()
+                mSelected = Matisse.obtainResult(data)
+                val uri = Matisse.obtainResult(data)[0]
+
+
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
+                if (cursor!!.moveToFirst()) {
+                    val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+                    yourRealPath = cursor.getString(columnIndex)
+                    Log.d("MA",yourRealPath)
+                } else {
+                    //boooo, cursor doesn't have rows ...
+                }
+                cursor.close()
+
+                val bmobFile = BmobFile(File(yourRealPath))
+                bmobFile.uploadblock(object : UploadFileListener() {
+
+                    override fun done(e: BmobException?) {
+                        if (e == null) {
+                            //bmobFile.getFileUrl()--返回的上传文件的完整地址
+                            toast("上传文件成功:" + bmobFile.fileUrl)
+                            Log.d("Url",bmobFile.fileUrl)
+                        } else {
+                            toast("上传文件失败：" + e.message)
+                        }
+
+                    }
+
+                    override fun onProgress(value: Int?) {
+                        // 返回的上传进度（百分比）
+                    }
+                })
             }
 
         }
     }
+
+
 
 
 }

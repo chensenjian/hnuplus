@@ -1,9 +1,14 @@
 package me.zhaoweihao.hnuplus;
 
 import android.app.ProgressDialog;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -167,7 +172,6 @@ public class CommentFragment extends Fragment implements MyInterface{
     public void myAction(String data) {
 
         if(user==null){
-
 
             Snackbar.make(recyclerView,"You are not signin",Snackbar.LENGTH_SHORT)
                     .setAction("Sign in", new View.OnClickListener() {
