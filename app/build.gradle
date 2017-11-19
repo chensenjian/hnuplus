@@ -39,7 +39,6 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'br.com.simplepass:loading-button-android:1.8.3'
     compile 'com.jakewharton:butterknife:8.8.1'
-    compile "org.jetbrains.anko:anko-sqlite:0.10.2"
     compile "org.jetbrains.anko:anko-commons:0.10.2"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testCompile 'junit:junit:4.12'
