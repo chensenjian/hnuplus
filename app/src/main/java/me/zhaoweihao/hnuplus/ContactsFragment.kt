@@ -68,7 +68,7 @@ class ContactsFragment : Fragment() {
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                 .thumbnailScale(0.85f)
                 .imageEngine(GlideEngine())
-                .forResult(0)
+                .forResult(2)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

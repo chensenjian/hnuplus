@@ -33,12 +33,14 @@ import com.google.gson.reflect.TypeToken
 import com.yoavst.kotlin.`KotlinPackage$SystemServices$69d7d2d0`.connectivityManager
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.hot_layout.*
+import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 
 /**
  * Created by Administrator on 2017/11/9.
  */
 
-class HotFragment : Fragment() {
+class HotFragment : Fragment(), AnotherInterface {
+
 
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: PostAdapter? = null
@@ -64,8 +66,9 @@ class HotFragment : Fragment() {
             //if userinfo is null,it means you did not sign in
             if (userInfo != null) {
                 //we will get data from PostActivity
-                val intent = Intent(activity, PostActivity::class.java)
-                startActivityForResult(intent, 1)
+//                val intent = Intent(activity, PostActivity::class.java)
+//                startActivityForResult(intent, 1)
+                (activity as MainActivity).gotoPostFragment()
             } else {
                 //show a snackbar to tell you to sign in
                 Snackbar.make(fb!!, "You are not signin", Snackbar.LENGTH_SHORT)
@@ -174,36 +177,8 @@ class HotFragment : Fragment() {
         prefsEditor.commit()
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            //receive data from PostActivity
-            1 -> if (resultCode == RESULT_OK) {
-                val returnedData = data!!.getStringExtra("data_return")
-                //check the receive data is empty or not
-                if (returnedData == "") {
-                    Toast.makeText(activity, "empty text", Toast.LENGTH_SHORT).show()
-                } else {
-                    //send data to server via bmob sdk
-                    val user = BmobUser.getCurrentUser(MyUser::class.java)
-                    val post = Post()
-                    post.content = returnedData
-                    post.author = user
-                    post.save(object : SaveListener<String>() {
-
-                        override fun done(objectId: String, e: BmobException?) {
-                            if (e == null) {
-                                Toast.makeText(activity, "post successfully", Toast.LENGTH_SHORT).show()
-                                loadData()
-                            } else {
-                                Toast.makeText(activity, "post failed", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    })
-                }
-            }
-
-        }
+    override fun myMethod() {
+        loadData()
     }
 
 }
