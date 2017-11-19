@@ -108,7 +108,7 @@ class HotFragment : Fragment() {
 
                             layoutManager = LinearLayoutManager(activity)
                             rv_posts!!.layoutManager = layoutManager
-                            adapter = PostAdapter(`object`)
+                            adapter = PostAdapter(`object`,1)
                             rv_posts!!.adapter = adapter
                             Snackbar.make(rv_posts!!, "refresh successfully", Snackbar.LENGTH_SHORT).show()
                             pull_to_refresh!!.setRefreshing(false)
@@ -132,7 +132,7 @@ class HotFragment : Fragment() {
 
                 layoutManager = LinearLayoutManager(activity)
                 rv_posts!!.layoutManager = layoutManager
-                adapter = PostAdapter(postList)
+                adapter = PostAdapter(postList,0)
                 rv_posts!!.adapter = adapter
                 Snackbar.make(rv_posts!!, "please check your network status", Snackbar.LENGTH_SHORT).show()
                 pull_to_refresh!!.setRefreshing(false)

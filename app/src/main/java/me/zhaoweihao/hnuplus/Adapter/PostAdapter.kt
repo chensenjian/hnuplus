@@ -6,11 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 
-import butterknife.BindView
-import butterknife.ButterKnife
+import android.widget.TextView
+import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
+
 import me.zhaoweihao.hnuplus.CommentActivity
 import me.zhaoweihao.hnuplus.JavaBean.Post
 import me.zhaoweihao.hnuplus.MainActivity
@@ -20,9 +19,11 @@ import me.zhaoweihao.hnuplus.R
  * Created by Administrator on 2017/11/9.
  */
 
-class PostAdapter(private val mPostList: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     private var mContext: Context? = null
+
+    private val disable = disableCode
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var postAuthor: TextView = view.findViewById(R.id.tv_author) as TextView
@@ -37,15 +38,25 @@ class PostAdapter(private val mPostList: List<Post>) : RecyclerView.Adapter<Post
         val view = LayoutInflater.from(mContext)
                 .inflate(R.layout.posts_item, parent, false)
         val holder = ViewHolder(view)
-        holder.postView.setOnClickListener {
-            val position = holder.adapterPosition
-            val post = mPostList[position]
-            val intent = Intent(mContext, CommentActivity::class.java)
-            intent.putExtra("author", post.author!!.username)
-            intent.putExtra("content", post.content)
-            intent.putExtra("objectID", post.objectId)
-            intent.putExtra("authorObjectID", post.author!!.objectId)
-            (mContext as MainActivity).startActivity(intent)
+        when(disable){
+            1 -> {
+                holder.postView.setOnClickListener {
+                    val position = holder.adapterPosition
+                    val post = mPostList[position]
+                    val intent = Intent(mContext, CommentActivity::class.java)
+                    intent.putExtra("author", post.author!!.username)
+                    intent.putExtra("content", post.content)
+                    intent.putExtra("objectID", post.objectId)
+                    intent.putExtra("authorObjectID", post.author!!.objectId)
+                    (mContext as MainActivity).startActivity(intent)
+                }
+            }
+
+            0 -> {
+                holder.postView.setOnClickListener {
+                    toast(mContext,"Please check your network status")
+                }
+            }
         }
         return holder
     }
