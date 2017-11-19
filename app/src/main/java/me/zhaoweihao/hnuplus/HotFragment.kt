@@ -203,10 +203,6 @@ class HotFragment : Fragment() {
                 }
             }
 
-            0 -> if (resultCode == RESULT_OK) {
-                val mSelected: List<Uri> = Matisse.obtainResult(data)
-                Log.d("Matisse", "mSelected: " + mSelected)
-            }
         }
     }
 

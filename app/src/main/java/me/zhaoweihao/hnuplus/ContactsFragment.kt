@@ -21,15 +21,10 @@ import android.net.Uri
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.widget.Toast
-import cn.bmob.v3.BmobUser
-import cn.bmob.v3.exception.BmobException
-import cn.bmob.v3.listener.SaveListener
+
 import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
-import me.zhaoweihao.hnuplus.JavaBean.MyUser
-import me.zhaoweihao.hnuplus.JavaBean.Post
 
 
 /**
@@ -85,19 +80,6 @@ class ContactsFragment : Fragment() {
             }
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-        //receive data from PostActivity
-            0 -> if (resultCode == Activity.RESULT_OK) {
-                val mSelected: List<Uri> = Matisse.obtainResult(data)
-                Log.d("Matisse", "mSelected: " + mSelected)
-            }
-        }
-    }
-
-
-
 
     }
 
