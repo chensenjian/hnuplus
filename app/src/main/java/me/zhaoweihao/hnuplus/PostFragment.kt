@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,10 +39,18 @@ class PostFragment :  Fragment() {
                 .show()
         btn_submit!!.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("data_return", et_post?.text.toString())
-            intent.putExtra("data_return_2", (activity as PostActivity).path)
-            activity.setResult(RESULT_OK,intent)
-            activity.finish()
+            if((activity as PostActivity).path == null){
+                intent.putExtra("data_return", et_post?.text.toString())
+                activity.setResult(RESULT_OK,intent)
+                activity.finish()
+            }else{
+                Log.d("PF","have photo")
+                intent.putExtra("data_return", et_post?.text.toString())
+                intent.putExtra("data_return_2",(activity as PostActivity).path)
+                activity.setResult(RESULT_OK,intent)
+                activity.finish()
+            }
+
         }
         btn_pic!!.setOnClickListener {
             Matisse.from(activity)

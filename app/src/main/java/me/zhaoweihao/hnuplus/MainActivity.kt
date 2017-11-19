@@ -197,62 +197,97 @@ class MainActivity : AppCompatActivity(){
             1 -> if (resultCode == RESULT_OK) {
                 val returnedData = data!!.getStringExtra("data_return")
                 val returnedPath = data!!.getStringExtra("data_return_2")
-                Log.d("MA",returnedPath)
-                //check the receive data is empty or not
-                if (returnedData == "") {
-                    Toast.makeText(this, "empty text", Toast.LENGTH_SHORT).show()
-                } else {
-                    //send data to server via bmob sdk
-                    val user = BmobUser.getCurrentUser(MyUser::class.java)
-                    val post = Post()
+                if(returnedPath == null){
+                    //check the receive data is empty or not
+                    if (returnedData == "") {
+                        Toast.makeText(this, "empty text", Toast.LENGTH_SHORT).show()
+                    } else {
+                        //send data to server via bmob sdk
+                        val user = BmobUser.getCurrentUser(MyUser::class.java)
+                        val post = Post()
 
+                        progressDialog = ProgressDialog(this)
+                        progressDialog!!.setMessage("Uploading...")
+                        progressDialog!!.setCancelable(true)
+                        progressDialog!!.show()
 
-                    val bmobFile = BmobFile(File(returnedPath))
+                        post.content = returnedData
+                        post.author = user
 
-                    progressDialog = ProgressDialog(this)
-                    progressDialog!!.setMessage("Uploading...")
-                    progressDialog!!.setCancelable(true)
-                    progressDialog!!.show()
+                        post.save(object : SaveListener<String>() {
 
-                bmobFile.uploadblock(object : UploadFileListener() {
-
-                    override fun done(e: BmobException?) {
-                        if (e == null) {
-                            progressDialog!!.hide()
-                            //bmobFile.getFileUrl()--返回的上传文件的完整地址
-                            toast("上传文件成功:" + bmobFile.fileUrl)
-                            Log.d("Url",bmobFile.fileUrl)
-                            post.content = returnedData
-                            post.author = user
-                            post.image = bmobFile
-
-                            post.save(object : SaveListener<String>() {
-
-                                override fun done(objectId: String, e: BmobException?) {
-                                    if (e == null) {
-                                        Toast.makeText(this@MainActivity, "post successfully", Toast.LENGTH_SHORT).show()
-                                        listener!!.myMethod()
-                                    } else {
-                                        Toast.makeText(this@MainActivity, "post failed", Toast.LENGTH_SHORT).show()
-                                    }
+                            override fun done(objectId: String, e: BmobException?) {
+                                if (e == null) {
+                                    progressDialog!!.hide()
+                                    Toast.makeText(this@MainActivity, "post successfully", Toast.LENGTH_SHORT).show()
+                                    listener!!.myMethod()
+                                } else {
+                                    Toast.makeText(this@MainActivity, "post failed", Toast.LENGTH_SHORT).show()
                                 }
-                            })
-
-                        } else {
-                            toast("上传文件失败：" + e.message)
-                        }
+                            }
+                        })
 
                     }
-
-                    override fun onProgress(value: Int?) {
-                        // 返回的上传进度（百分比）
-                    }
-                })
-
                 }
-            }
+                else{
+                    Log.d("MA",returnedPath)
+                    //check the receive data is empty or not
+                    if (returnedData == "") {
+                        Toast.makeText(this, "empty text", Toast.LENGTH_SHORT).show()
+                    } else {
+                        //send data to server via bmob sdk
+                        val user = BmobUser.getCurrentUser(MyUser::class.java)
+                        val post = Post()
 
-        }
+
+                        val bmobFile = BmobFile(File(returnedPath))
+
+                        progressDialog = ProgressDialog(this)
+                        progressDialog!!.setMessage("Uploading...")
+                        progressDialog!!.setCancelable(true)
+                        progressDialog!!.show()
+
+                        bmobFile.uploadblock(object : UploadFileListener() {
+
+                            override fun done(e: BmobException?) {
+                                if (e == null) {
+                                    progressDialog!!.hide()
+                                    //bmobFile.getFileUrl()--返回的上传文件的完整地址
+                                    toast("上传文件成功:" + bmobFile.fileUrl)
+                                    Log.d("Url",bmobFile.fileUrl)
+                                    post.content = returnedData
+                                    post.author = user
+                                    post.image = bmobFile
+
+                                    post.save(object : SaveListener<String>() {
+
+                                        override fun done(objectId: String, e: BmobException?) {
+                                            if (e == null) {
+                                                Toast.makeText(this@MainActivity, "post successfully", Toast.LENGTH_SHORT).show()
+                                                listener!!.myMethod()
+                                            } else {
+                                                Toast.makeText(this@MainActivity, "post failed", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                    })
+
+                                } else {
+                                    toast("上传文件失败：" + e.message)
+                                }
+
+                            }
+
+                            override fun onProgress(value: Int?) {
+                                // 返回的上传进度（百分比）
+                            }
+                        })
+
+                    }
+                }
+
+            }
+                }
+
     }
 
 }
