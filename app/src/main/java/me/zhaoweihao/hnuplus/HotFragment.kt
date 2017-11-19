@@ -50,7 +50,7 @@ class HotFragment : Fragment(), AnotherInterface {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        loadData()
+        loadData()
 
         pull_to_refresh!!.setOnRefreshListener { loadData() }
 
@@ -98,7 +98,7 @@ class HotFragment : Fragment(), AnotherInterface {
                 pull_to_refresh!!.setRefreshing(true)
                 val query = BmobQuery<Post>()
                 //        query.setLimit(15)
-                query.include("author")
+                query.include("author,image")
                 query.findObjects(object : FindListener<Post>() {
 
                     override fun done(`object`: List<Post>, e: BmobException?) {

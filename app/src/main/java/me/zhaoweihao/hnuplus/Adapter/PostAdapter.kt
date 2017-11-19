@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 
 import me.zhaoweihao.hnuplus.CommentActivity
@@ -28,6 +30,7 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var postAuthor: TextView = view.findViewById(R.id.tv_author) as TextView
         var postContent: TextView = view.findViewById(R.id.tv_content) as TextView
+        var postImage: ImageView = view.findViewById(R.id.iv_post) as ImageView
         var postView: View = view
     }
 
@@ -65,6 +68,13 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
         val post = mPostList[position]
         holder.postAuthor.text = post.author!!.username
         holder.postContent.text = post.content
+        if(post.image == null){
+
+        }else{
+            Glide.with(mContext).load(post.image!!.fileUrl).into(holder.postImage)
+        }
+
+
     }
 
     override fun getItemCount(): Int {
