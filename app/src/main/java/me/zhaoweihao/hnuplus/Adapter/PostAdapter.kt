@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 
@@ -69,7 +70,7 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
         holder.postAuthor.text = post.author!!.username
         holder.postContent.text = post.content
         if(post.image == null){
-
+            Glide.clear(holder.postImage)
         }else{
             Glide.with(mContext).load(post.image!!.fileUrl).into(holder.postImage)
         }
