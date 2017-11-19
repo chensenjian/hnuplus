@@ -37,15 +37,7 @@ class ContactsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn1.setOnClickListener {
-            val appSharedPrefs = PreferenceManager
-                    .getDefaultSharedPreferences(activity.getApplicationContext())
-            val gson = Gson()
-            val json = appSharedPrefs.getString("MyObject", "")
 
-            val type = object : TypeToken<List<Post>>() {
-            }.type
-            val postList: List<Post> = gson.fromJson(json,type)
-            Log.d("CF", postList[0].content+postList.size.toString())
         }
 
     }

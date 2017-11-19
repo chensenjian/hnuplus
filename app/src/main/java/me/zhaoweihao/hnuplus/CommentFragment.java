@@ -168,6 +168,8 @@ public class CommentFragment extends Fragment implements MyInterface{
 
         if(user==null){
 
+
+
             Snackbar.make(recyclerView,"You are not signin",Snackbar.LENGTH_SHORT)
                     .setAction("Sign in", new View.OnClickListener() {
                         @Override

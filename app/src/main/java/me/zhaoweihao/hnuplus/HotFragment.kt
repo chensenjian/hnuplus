@@ -25,8 +25,11 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 
 import android.app.Activity.RESULT_OK
+
 import android.preference.PreferenceManager
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.yoavst.kotlin.`KotlinPackage$SystemServices$69d7d2d0`.connectivityManager
 import kotlinx.android.synthetic.main.hot_layout.*
 
 /**
@@ -56,9 +59,9 @@ class HotFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        refreshRecyclerView()
+        loadData()
 
-        pull_to_refresh!!.setOnRefreshListener { refreshRecyclerView() }
+        pull_to_refresh!!.setOnRefreshListener { loadData() }
 
         fb!!.setOnClickListener {
             userInfo = BmobUser.getCurrentUser(MyUser::class.java)
@@ -87,44 +90,82 @@ class HotFragment : Fragment() {
 
     }
 
-    private fun refreshRecyclerView() {
+    private fun refreshRecyclerView(networkCode: Int) {
 
-        pull_to_refresh!!.setRefreshing(true)
-        val query = BmobQuery<Post>()
-//        query.setLimit(15)
-        query.include("author")
-        query.findObjects(object : FindListener<Post>() {
+        when (networkCode) {
+            1 -> {
+                pull_to_refresh!!.setRefreshing(true)
+                val query = BmobQuery<Post>()
+                //        query.setLimit(15)
+                query.include("author")
+                query.findObjects(object : FindListener<Post>() {
 
-            override fun done(`object`: List<Post>, e: BmobException?) {
-                if (e == null) {
-                    Collections.reverse(`object`)
+                    override fun done(`object`: List<Post>, e: BmobException?) {
+                        if (e == null) {
+                            Collections.reverse(`object`)
 
-                    Log.d("HF",`object`.size.toString())
+                            saveListToPrefs(`object`)
 
-                    val appSharedPrefs = PreferenceManager
-                            .getDefaultSharedPreferences(activity.applicationContext)
-                    val prefsEditor = appSharedPrefs.edit()
-                    val gson = Gson()
-                    val json = gson.toJson(`object`)
+                            layoutManager = LinearLayoutManager(activity)
+                            rv_posts!!.layoutManager = layoutManager
+                            adapter = PostAdapter(`object`)
+                            rv_posts!!.adapter = adapter
+                            Snackbar.make(rv_posts!!, "refresh successfully", Snackbar.LENGTH_SHORT).show()
+                            pull_to_refresh!!.setRefreshing(false)
 
-                    prefsEditor.putString("MyObject", json)
-                    prefsEditor.commit()
+                        } else {
+                            Log.i("bmob", "失败：" + e.message)
+                        }
+                    }
 
-                    //                    Toast.makeText(getActivity(),Integer.toString(object.size()), Toast.LENGTH_SHORT).show();
-                    layoutManager = LinearLayoutManager(activity)
-                    rv_posts!!.layoutManager = layoutManager
-                    adapter = PostAdapter(`object`)
-                    rv_posts!!.adapter = adapter
-                    Snackbar.make(rv_posts!!, "refresh successfully", Snackbar.LENGTH_SHORT).show()
-                    pull_to_refresh!!.setRefreshing(false)
+                })}
+            0 -> {
+                Log.d("HF","you are offline")
+                val appSharedPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(activity.getApplicationContext())
+                val gson = Gson()
+                val json = appSharedPrefs.getString("MyObject", "")
 
-                } else {
-                    Log.i("bmob", "失败：" + e.message)
-                }
+                val type = object : TypeToken<List<Post>>() {
+                }.type
+                val postList: List<Post> = gson.fromJson(json,type)
+
+                layoutManager = LinearLayoutManager(activity)
+                rv_posts!!.layoutManager = layoutManager
+                adapter = PostAdapter(postList)
+                rv_posts!!.adapter = adapter
+                Snackbar.make(rv_posts!!, "please check your network status", Snackbar.LENGTH_SHORT).show()
+                pull_to_refresh!!.setRefreshing(false)
             }
 
-        })
+        }
 
+    }
+
+    private fun loadData(){
+        //check network status
+        val conMgr = connectivityManager(context)
+        val activeNetwork = conMgr.activeNetworkInfo
+        if (activeNetwork != null && activeNetwork.isConnected) {
+            // notify user online and load online data
+            refreshRecyclerView(1)
+        } else {
+            // notify user offline and load local data
+            refreshRecyclerView(0)
+        }
+    }
+
+    /**
+     * save list<post> to sharepreferences
+     */
+    private fun saveListToPrefs(postList: List<Post>){
+        val appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(activity.applicationContext)
+        val prefsEditor = appSharedPrefs.edit()
+        val gson = Gson()
+        val json = gson.toJson(postList)
+        prefsEditor.putString("MyObject", json)
+        prefsEditor.commit()
     }
 
 
@@ -146,7 +187,7 @@ class HotFragment : Fragment() {
                         override fun done(objectId: String, e: BmobException?) {
                             if (e == null) {
                                 Toast.makeText(activity, "post successfully", Toast.LENGTH_SHORT).show()
-                                refreshRecyclerView()
+                                loadData()
                             } else {
                                 Toast.makeText(activity, "post failed", Toast.LENGTH_SHORT).show()
                             }
