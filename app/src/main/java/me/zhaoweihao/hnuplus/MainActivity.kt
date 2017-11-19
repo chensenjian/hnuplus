@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Window
 import cn.bmob.v3.Bmob
 import kotlinx.android.synthetic.main.activity_main.*
+import me.zhaoweihao.hnuplus.Constant.Constant
 
 /**
  * Created by zhaoweihaoChina on 2017/11/9.
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity(){
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
 
-        Bmob.initialize(this, "a15e40755375ee7434e6be8c000c184b")
+        Bmob.initialize(this, Constant.APP_ID)
 
         bindListener()
         fragmentManager = supportFragmentManager
