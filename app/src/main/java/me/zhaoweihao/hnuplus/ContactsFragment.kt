@@ -25,6 +25,8 @@ import android.util.Log
 import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.R.id.action_image
+import com.zhihu.matisse.R.id.image
 
 
 /**
@@ -60,15 +62,15 @@ class ContactsFragment : Fragment() {
         }
 
     private fun showImageSelector(){
-        Matisse.from(activity)
-                .choose(MimeType.allOf())
-                .countable(true)
-                .maxSelectable(1)
-                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
-                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                .thumbnailScale(0.85f)
-                .imageEngine(GlideEngine())
-                .forResult(2)
+//        Matisse.from(activity)
+//                .choose(setOf(MimeType.JPEG,MimeType.PNG))
+//                .countable(true)
+//                .maxSelectable(1)
+//                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
+//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                .thumbnailScale(0.85f)
+//                .imageEngine(GlideEngine())
+//                .forResult(2)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

@@ -2,12 +2,16 @@ package me.zhaoweihao.hnuplus
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.florent37.viewtooltip.ViewTooltip
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.GlideEngine
 import kotlinx.android.synthetic.main.post_layout.*
 
 /**
@@ -35,8 +39,20 @@ class PostFragment :  Fragment() {
         btn_submit!!.setOnClickListener {
             val intent = Intent()
             intent.putExtra("data_return", et_post?.text.toString())
+            intent.putExtra("data_return_2", (activity as PostActivity).path)
             activity.setResult(RESULT_OK,intent)
             activity.finish()
+        }
+        btn_pic!!.setOnClickListener {
+            Matisse.from(activity)
+                .choose(setOf(MimeType.JPEG,MimeType.PNG))
+                .countable(true)
+                .maxSelectable(1)
+                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .thumbnailScale(0.85f)
+                .imageEngine(GlideEngine())
+                .forResult(2)
         }
     }
 
