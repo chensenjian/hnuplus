@@ -10,28 +10,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.widget.Toast
-
 import java.util.Collections
 
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
-import cn.bmob.v3.listener.SaveListener
+
 import me.zhaoweihao.hnuplus.Adapter.PostAdapter
 import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 
-import android.app.Activity.RESULT_OK
-import android.net.Uri
-
 import android.preference.PreferenceManager
-import android.util.Log
+
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.yoavst.kotlin.`KotlinPackage$SystemServices$69d7d2d0`.connectivityManager
-import com.zhihu.matisse.Matisse
+
 import kotlinx.android.synthetic.main.hot_layout.*
 import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 
@@ -40,7 +35,6 @@ import me.zhaoweihao.hnuplus.Interface.AnotherInterface
  */
 
 class HotFragment : Fragment(), AnotherInterface {
-
 
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: PostAdapter? = null
@@ -66,8 +60,6 @@ class HotFragment : Fragment(), AnotherInterface {
             //if userinfo is null,it means you did not sign in
             if (userInfo != null) {
                 //we will get data from PostActivity
-//                val intent = Intent(activity, PostActivity::class.java)
-//                startActivityForResult(intent, 1)
                 (activity as MainActivity).gotoPostFragment()
             } else {
                 //show a snackbar to tell you to sign in

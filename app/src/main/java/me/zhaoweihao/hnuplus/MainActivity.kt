@@ -1,7 +1,5 @@
 package me.zhaoweihao.hnuplus
 
-
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -16,7 +14,7 @@ import cn.bmob.v3.Bmob
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
-import com.zhihu.matisse.Matisse
+
 import kotlinx.android.synthetic.main.activity_main.*
 import me.zhaoweihao.hnuplus.Constant.Constant
 import me.zhaoweihao.hnuplus.Interface.AnotherInterface
@@ -26,9 +24,9 @@ import cn.bmob.v3.listener.UploadFileListener
 import cn.bmob.v3.datatype.BmobFile
 import org.jetbrains.anko.toast
 import java.io.File
-import java.net.URI
+
 import android.provider.MediaStore
-import android.R.attr.data
+
 import android.app.ProgressDialog
 
 
@@ -53,16 +51,9 @@ class MainActivity : AppCompatActivity(){
 
     private var listener: AnotherInterface? = null
 
-    private var mSelected: List<Uri>? =null
-
     private var yourRealPath: String? =null
 
     private var progressDialog: ProgressDialog? = null
-
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +66,6 @@ class MainActivity : AppCompatActivity(){
         fragmentManager = supportFragmentManager
 
         // select 0 tab when first run
-
         setTabSelection(0)
     }
 
@@ -258,44 +248,11 @@ class MainActivity : AppCompatActivity(){
                         // 返回的上传进度（百分比）
                     }
                 })
-//                    post.image = BmobFile(File(returnedPath))
 
                 }
             }
 
-//            2 -> if (resultCode == RESULT_OK){
-//
-//                Toast.makeText(this@MainActivity,"select successfully",Toast.LENGTH_SHORT).show()
-//                mSelected = Matisse.obtainResult(data)
-//                val uri = Matisse.obtainResult(data)[0]
-//
-//
-//
-//
-//                val bmobFile = BmobFile(File(yourRealPath))
-//                bmobFile.uploadblock(object : UploadFileListener() {
-//
-//                    override fun done(e: BmobException?) {
-//                        if (e == null) {
-//                            //bmobFile.getFileUrl()--返回的上传文件的完整地址
-//                            toast("上传文件成功:" + bmobFile.fileUrl)
-//                            Log.d("Url",bmobFile.fileUrl)
-//                        } else {
-//                            toast("上传文件失败：" + e.message)
-//                        }
-//
-//                    }
-//
-//                    override fun onProgress(value: Int?) {
-//                        // 返回的上传进度（百分比）
-//                    }
-//                })
-//            }
-
         }
     }
-
-
-
 
 }
