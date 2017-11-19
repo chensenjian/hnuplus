@@ -89,7 +89,7 @@ class HotFragment : Fragment() {
 
         pull_to_refresh!!.setRefreshing(true)
         val query = BmobQuery<Post>()
-        query.setLimit(15)
+//        query.setLimit(15)
         query.include("author")
         query.findObjects(object : FindListener<Post>() {
 
