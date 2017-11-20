@@ -2,7 +2,7 @@ package me.zhaoweihao.hnuplus
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
+
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
@@ -24,8 +24,6 @@ import cn.bmob.v3.listener.UploadFileListener
 import cn.bmob.v3.datatype.BmobFile
 import org.jetbrains.anko.toast
 import java.io.File
-
-import android.provider.MediaStore
 
 import android.app.ProgressDialog
 
@@ -49,9 +47,10 @@ class MainActivity : AppCompatActivity(){
      */
     private var fragmentManager: FragmentManager? = null
 
+    /**
+     * Used to call fragment method
+     */
     private var listener: AnotherInterface? = null
-
-    private var yourRealPath: String? =null
 
     private var progressDialog: ProgressDialog? = null
 
@@ -176,27 +175,14 @@ class MainActivity : AppCompatActivity(){
         this.listener = listener
     }
 
-    fun uriToPath(uri:Uri):String? {
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
-        if (cursor!!.moveToFirst()) {
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            yourRealPath = cursor.getString(columnIndex)
-            Log.d("MA",yourRealPath)
-        } else {
-            //boooo, cursor doesn't have rows ...
-        }
-        return yourRealPath
-        cursor.close()
-
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             //receive data from PostActivity
             1 -> if (resultCode == RESULT_OK) {
                 val returnedData = data!!.getStringExtra("data_return")
                 val returnedPath = data!!.getStringExtra("data_return_2")
+                //check whether the user selects the picture
+                //if returnedPath is null,it means the user did not selects the picture
                 if(returnedPath == null){
                     //check the receive data is empty or not
                     if (returnedData == "") {
@@ -246,19 +232,17 @@ class MainActivity : AppCompatActivity(){
                         progressDialog!!.setMessage("Uploading...")
                         progressDialog!!.setCancelable(true)
                         progressDialog!!.show()
-
+                        //upload photo
                         bmobFile.uploadblock(object : UploadFileListener() {
 
                             override fun done(e: BmobException?) {
                                 if (e == null) {
                                     progressDialog!!.hide()
-                                    //bmobFile.getFileUrl()--返回的上传文件的完整地址
-                                    toast("上传文件成功:" + bmobFile.fileUrl)
-                                    Log.d("Url",bmobFile.fileUrl)
+
                                     post.content = returnedData
                                     post.author = user
                                     post.image = bmobFile
-
+                                    //save post
                                     post.save(object : SaveListener<String>() {
 
                                         override fun done(objectId: String, e: BmobException?) {
@@ -272,13 +256,13 @@ class MainActivity : AppCompatActivity(){
                                     })
 
                                 } else {
-                                    toast("上传文件失败：" + e.message)
+                                    toast("upload file failed : " + e.message)
                                 }
 
                             }
 
                             override fun onProgress(value: Int?) {
-                                // 返回的上传进度（百分比）
+                                // return uploading percentage
                             }
                         })
 
