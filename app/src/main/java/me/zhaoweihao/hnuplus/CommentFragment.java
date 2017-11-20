@@ -1,14 +1,12 @@
 package me.zhaoweihao.hnuplus;
 
 import android.app.ProgressDialog;
-import android.content.ContentUris;
+
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
+
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -20,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +59,9 @@ public class CommentFragment extends Fragment implements MyInterface{
     @BindView(R.id.rv_comments) RecyclerView recyclerView;
     @BindView(R.id.tv_comment_author) TextView commentAuthorTextView;
     @BindView(R.id.tv_comment_content) TextView commentContentTextView;
+    @BindView(R.id.iv_comment_image) ImageView commentImageView;
     @BindView(R.id.fl_delete) FrameLayout deleteFrameLayout;
+
 
     private LinearLayoutManager layoutManager;
     private CommentAdapter adapter;
@@ -93,6 +94,7 @@ public class CommentFragment extends Fragment implements MyInterface{
 
         }else{
             Log.d("CF",intent.getStringExtra("imageUrl"));
+            Glide.with(this).load(intent.getStringExtra("imageUrl")).into(commentImageView);
         }
 
         if(user == null){
