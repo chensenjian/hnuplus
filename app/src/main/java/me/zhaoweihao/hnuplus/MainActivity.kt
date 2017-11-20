@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity(){
                         //send data to server via bmob sdk
                         val user = BmobUser.getCurrentUser(MyUser::class.java)
                         val post = Post()
-
+                        //show uploading progressdialog
                         progressDialog = ProgressDialog(this)
                         progressDialog!!.setMessage("Uploading...")
                         progressDialog!!.setCancelable(true)
@@ -225,9 +225,8 @@ class MainActivity : AppCompatActivity(){
                         val user = BmobUser.getCurrentUser(MyUser::class.java)
                         val post = Post()
 
-
                         val bmobFile = BmobFile(File(returnedPath))
-
+                        //show uploading progressdialog
                         progressDialog = ProgressDialog(this)
                         progressDialog!!.setMessage("Uploading...")
                         progressDialog!!.setCancelable(true)

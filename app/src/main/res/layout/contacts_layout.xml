@@ -25,12 +25,6 @@
             android:padding="10dp"
             android:text="It will be something in the future"
             android:textSize="20sp" />
-        <Button
-            android:id="@+id/btn_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="upload"
-            />
 
     </LinearLayout>
 

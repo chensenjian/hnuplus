@@ -1,15 +1,20 @@
 package me.zhaoweihao.hnuplus
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.florent37.viewtooltip.ViewTooltip
+import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
@@ -53,7 +58,18 @@ class PostFragment :  Fragment() {
 
         }
         btn_pic!!.setOnClickListener {
-            Matisse.from(activity)
+            // request runtime permission
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+            } else {
+                showImageSelector()
+            }
+
+        }
+    }
+
+    private fun showImageSelector(){
+        Matisse.from(activity)
                 .choose(setOf(MimeType.JPEG,MimeType.PNG))
                 .countable(true)
                 .maxSelectable(1)
@@ -62,6 +78,16 @@ class PostFragment :  Fragment() {
                 .thumbnailScale(0.85f)
                 .imageEngine(GlideEngine())
                 .forResult(2)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        //request runtime permission successfully
+        when (requestCode) {
+            1 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showImageSelector()
+            } else {
+                toast(activity, "denied")
+            }
         }
     }
 
