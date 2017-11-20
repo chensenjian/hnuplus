@@ -51,6 +51,11 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
                     intent.putExtra("content", post.content)
                     intent.putExtra("objectID", post.objectId)
                     intent.putExtra("authorObjectID", post.author!!.objectId)
+                    if (post.image == null){
+
+                    }else{
+                        intent.putExtra("imageUrl", post.image!!.fileUrl)
+                    }
                     (mContext as MainActivity).startActivity(intent)
                 }
             }

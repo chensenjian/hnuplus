@@ -15,12 +15,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Collections;
 import java.util.List;
@@ -85,6 +88,12 @@ public class CommentFragment extends Fragment implements MyInterface{
         commentContentTextView.setText(intent.getStringExtra("content"));
         objectID = intent.getStringExtra("objectID");
         authorObjectID = intent.getStringExtra("authorObjectID");
+
+        if (intent.getStringExtra("imageUrl") == null){
+
+        }else{
+            Log.d("CF",intent.getStringExtra("imageUrl"));
+        }
 
         if(user == null){
             deleteFrameLayout.setVisibility(View.GONE);
