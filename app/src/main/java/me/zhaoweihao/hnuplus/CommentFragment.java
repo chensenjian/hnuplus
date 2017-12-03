@@ -7,7 +7,6 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -46,11 +45,6 @@ import me.zhaoweihao.hnuplus.JavaBean.Post;
  * Created by Administrator on 2017/11/10.
  */
 
-/**
- * Because of the bmob sdk
- * I can't convert this fragment to kotlin lang
- */
-
 public class CommentFragment extends Fragment implements MyInterface{
 
     /**
@@ -62,17 +56,11 @@ public class CommentFragment extends Fragment implements MyInterface{
     @BindView(R.id.iv_comment_image) ImageView commentImageView;
     @BindView(R.id.fl_delete) FrameLayout deleteFrameLayout;
 
-
     private LinearLayoutManager layoutManager;
     private CommentAdapter adapter;
     private ProgressDialog progressDialog;
-    private String objectID,authorObjectID;
+    private String objectID,authorObjectID,imageUrl;
     private MyUser user;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,7 +83,17 @@ public class CommentFragment extends Fragment implements MyInterface{
         }else{
             Log.d("CF",intent.getStringExtra("imageUrl"));
             Glide.with(this).load(intent.getStringExtra("imageUrl")).into(commentImageView);
+            imageUrl = intent.getStringExtra("imageUrl");
         }
+
+        commentImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getActivity(),PhotoViewActivity.class);
+                intent1.putExtra("imageUrl",imageUrl);
+                startActivity(intent1);
+            }
+        });
 
         if(user == null){
             deleteFrameLayout.setVisibility(View.GONE);
