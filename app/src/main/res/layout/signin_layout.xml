@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/animation_list"
-    android:id="@+id/container">
+    android:id="@+id/container_1">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
