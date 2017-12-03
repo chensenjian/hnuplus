@@ -5,25 +5,27 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.*
-import com.github.florent37.viewtooltip.ViewTooltip
+import com.bumptech.glide.Glide
 import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import kotlinx.android.synthetic.main.post_layout.*
-import me.zhaoweihao.hnuplus.Interface.AnotherInterface
+import me.zhaoweihao.hnuplus.Interface.PostInterface
 
 /**
  * Created by Administrator on 2017/11/9.
  */
 
-class PostFragment :  Fragment(), AnotherInterface {
+class PostFragment :  Fragment(), PostInterface {
+
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -35,13 +37,6 @@ class PostFragment :  Fragment(), AnotherInterface {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        ViewTooltip
-//                .on(et_post)
-//                .autoHide(true,3000)
-//                .corner(30)
-//                .position(ViewTooltip.Position.BOTTOM)
-//                .text("Share what you see today")
-//                .show()
         btn_pic!!.setOnClickListener {
             // request runtime permission
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -89,6 +84,13 @@ class PostFragment :  Fragment(), AnotherInterface {
             activity.setResult(RESULT_OK,intent)
             activity.finish()
         }
+    }
+
+    override fun showImage(imageUri: Uri) {
+        btn_pic.visibility = View.INVISIBLE
+        tv_add_pic.visibility = View.INVISIBLE
+        Glide.with(activity).load(imageUri).into(iv_show_pic)
+        iv_show_pic.setOnClickListener { showImageSelector() }
     }
 
 

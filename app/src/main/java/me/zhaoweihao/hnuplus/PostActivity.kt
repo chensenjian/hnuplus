@@ -12,6 +12,7 @@ import android.view.MenuItem
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.activity_post.*
 import me.zhaoweihao.hnuplus.Interface.AnotherInterface
+import me.zhaoweihao.hnuplus.Interface.PostInterface
 
 
 class PostActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class PostActivity : AppCompatActivity() {
     private var postFragment: PostFragment? = null
     public var path: String? = null
 
-    private var listener: AnotherInterface? = null
+    private var listener: PostInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,7 @@ class PostActivity : AppCompatActivity() {
 
     }
 
-    fun setListener(listener: AnotherInterface) {
+    fun setListener(listener: PostInterface) {
         this.listener = listener
     }
 
@@ -56,6 +57,7 @@ class PostActivity : AppCompatActivity() {
         //receive data from PostActivity
             2 -> if (resultCode == RESULT_OK) {
                 val uri = Matisse.obtainResult(data)[0]
+                listener!!.showImage(uri)
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
                 val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
                 if (cursor!!.moveToFirst()) {
