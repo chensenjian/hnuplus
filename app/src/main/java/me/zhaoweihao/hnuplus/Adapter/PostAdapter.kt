@@ -15,6 +15,7 @@ import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import me.zhaoweihao.hnuplus.CommentActivity
 import me.zhaoweihao.hnuplus.JavaBean.Post
 import me.zhaoweihao.hnuplus.MainActivity
+import me.zhaoweihao.hnuplus.PhotoViewActivity
 import me.zhaoweihao.hnuplus.R
 
 /**
@@ -56,6 +57,13 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
                     }else{
                         intent.putExtra("imageUrl", post.image!!.fileUrl)
                     }
+                    (mContext as MainActivity).startActivity(intent)
+                }
+                holder.postImage.setOnClickListener {
+                    val position = holder.adapterPosition
+                    val post = mPostList[position]
+                    val intent = Intent(mContext, PhotoViewActivity::class.java)
+                    intent.putExtra("imageUrl", post.image!!.fileUrl)
                     (mContext as MainActivity).startActivity(intent)
                 }
             }
