@@ -21,11 +21,6 @@ import me.zhaoweihao.hnuplus.JavaBean.MyUser
  * Created by Administrator on 2017/11/9.
  */
 
-/**
- * Because of the bmob sdk
- * I can't convert this fragment to kotlin lang
- */
-
 class UserFragment : Fragment() {
 
     private var userInfo: MyUser? = null
