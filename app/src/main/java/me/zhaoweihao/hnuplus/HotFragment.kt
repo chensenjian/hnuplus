@@ -28,13 +28,13 @@ import com.google.gson.reflect.TypeToken
 import com.yoavst.kotlin.`KotlinPackage$SystemServices$69d7d2d0`.connectivityManager
 
 import kotlinx.android.synthetic.main.hot_layout.*
-import me.zhaoweihao.hnuplus.Interface.AnotherInterface
+import me.zhaoweihao.hnuplus.Interface.HotInterface
 
 /**
  * Created by Administrator on 2017/11/9.
  */
 
-class HotFragment : Fragment(), AnotherInterface {
+class HotFragment : Fragment(), HotInterface {
 
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: PostAdapter? = null
@@ -50,7 +50,7 @@ class HotFragment : Fragment(), AnotherInterface {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        loadData()
+        loadData()
 
         pull_to_refresh!!.setOnRefreshListener { loadData() }
 

@@ -35,9 +35,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.yalantis:phoenix:1.2.3'
-    compile 'com.github.florent37:viewtooltip:1.0.8'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile 'br.com.simplepass:loading-button-android:1.8.3'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile "org.jetbrains.anko:anko-commons:0.10.2"
     compile 'com.github.yoavst:androidKotlin:1.5.1'

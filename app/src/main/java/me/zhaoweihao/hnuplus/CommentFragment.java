@@ -36,7 +36,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import me.zhaoweihao.hnuplus.Adapter.CommentAdapter;
-import me.zhaoweihao.hnuplus.Interface.MyInterface;
+import me.zhaoweihao.hnuplus.Interface.CommentInterface;
 import me.zhaoweihao.hnuplus.JavaBean.Comment;
 import me.zhaoweihao.hnuplus.JavaBean.MyUser;
 import me.zhaoweihao.hnuplus.JavaBean.Post;
@@ -45,7 +45,7 @@ import me.zhaoweihao.hnuplus.JavaBean.Post;
  * Created by Administrator on 2017/11/10.
  */
 
-public class CommentFragment extends Fragment implements MyInterface{
+public class CommentFragment extends Fragment implements CommentInterface {
 
     /**
      * Butter Knife
@@ -165,7 +165,7 @@ public class CommentFragment extends Fragment implements MyInterface{
             @Override
             public void done(List<Comment> objects,BmobException e) {
                 if(objects.size()==0){
-                    Toast.makeText(getActivity(), "empty comment", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "empty comment", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
                 }else{
                 Collections.reverse(objects);

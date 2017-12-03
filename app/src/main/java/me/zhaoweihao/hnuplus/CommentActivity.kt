@@ -4,13 +4,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_comment.*
-import me.zhaoweihao.hnuplus.Interface.MyInterface
+import me.zhaoweihao.hnuplus.Interface.CommentInterface
 
 class CommentActivity : AppCompatActivity() {
 
     private var fragmentManager: FragmentManager? = null
     private var commentFragment: CommentFragment? = null
-    private var listener: MyInterface? = null
+    private var listener: CommentInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class CommentActivity : AppCompatActivity() {
         iv_comment!!.setOnClickListener { listener!!.myAction(et_comment!!.text.toString()) }
     }
 
-    fun setListener(listener: MyInterface) {
+    fun setListener(listener: CommentInterface) {
         this.listener = listener
     }
 

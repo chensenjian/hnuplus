@@ -17,7 +17,7 @@ import cn.bmob.v3.listener.SaveListener
 
 import kotlinx.android.synthetic.main.activity_main.*
 import me.zhaoweihao.hnuplus.Constant.Constant
-import me.zhaoweihao.hnuplus.Interface.AnotherInterface
+import me.zhaoweihao.hnuplus.Interface.HotInterface
 import me.zhaoweihao.hnuplus.JavaBean.MyUser
 import me.zhaoweihao.hnuplus.JavaBean.Post
 import cn.bmob.v3.listener.UploadFileListener
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(){
     /**
      * Used to call fragment method
      */
-    private var listener: AnotherInterface? = null
+    private var listener: HotInterface? = null
 
     private var progressDialog: ProgressDialog? = null
 
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity(){
                 startActivityForResult(intent, 1)
     }
 
-    fun setListener(listener: AnotherInterface) {
+    fun setListener(listener: HotInterface) {
         this.listener = listener
     }
 

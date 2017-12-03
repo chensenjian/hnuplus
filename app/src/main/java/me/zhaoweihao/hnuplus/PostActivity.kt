@@ -11,7 +11,6 @@ import android.view.MenuItem
 
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.activity_post.*
-import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 import me.zhaoweihao.hnuplus.Interface.PostInterface
 
 
