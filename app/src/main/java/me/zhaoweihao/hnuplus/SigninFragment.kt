@@ -21,16 +21,12 @@ import kotlinx.android.synthetic.main.signin_layout.*
  * Created by Administrator on 2017/11/10.
  */
 
-/**
- * Because of the bmob sdk
- * I can't convert this fragment to kotlin lang
- */
 
 class SigninFragment : Fragment() {
 
     private var anim: AnimationDrawable? = null
     private var progressDialog: ProgressDialog? = null
-    
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val signinLayout = inflater!!.inflate(R.layout.signin_layout,
