@@ -10,21 +10,21 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.github.florent37.viewtooltip.ViewTooltip
 import com.yoavst.kotlin.`KotlinPackage$Toasts$53212cf1`.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import kotlinx.android.synthetic.main.post_layout.*
+import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 
 /**
  * Created by Administrator on 2017/11/9.
  */
 
-class PostFragment :  Fragment() {
+class PostFragment :  Fragment(), AnotherInterface {
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,21 +42,6 @@ class PostFragment :  Fragment() {
 //                .position(ViewTooltip.Position.BOTTOM)
 //                .text("Share what you see today")
 //                .show()
-        btn_submit!!.setOnClickListener {
-            val intent = Intent()
-            if((activity as PostActivity).path == null){
-                intent.putExtra("data_return", et_post?.text.toString())
-                activity.setResult(RESULT_OK,intent)
-                activity.finish()
-            }else{
-                Log.d("PF","have photo")
-                intent.putExtra("data_return", et_post?.text.toString())
-                intent.putExtra("data_return_2",(activity as PostActivity).path)
-                activity.setResult(RESULT_OK,intent)
-                activity.finish()
-            }
-
-        }
         btn_pic!!.setOnClickListener {
             // request runtime permission
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -90,5 +75,22 @@ class PostFragment :  Fragment() {
             }
         }
     }
+
+    override fun myMethod() {
+        val intent = Intent()
+        if((activity as PostActivity).path == null){
+            intent.putExtra("data_return", et_post?.text.toString())
+            activity.setResult(RESULT_OK,intent)
+            activity.finish()
+        }else{
+            Log.d("PF","have photo")
+            intent.putExtra("data_return", et_post?.text.toString())
+            intent.putExtra("data_return_2",(activity as PostActivity).path)
+            activity.setResult(RESULT_OK,intent)
+            activity.finish()
+        }
+    }
+
+
 
 }

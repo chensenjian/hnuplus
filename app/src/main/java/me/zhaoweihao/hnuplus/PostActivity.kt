@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.FragmentManager
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 
 import com.zhihu.matisse.Matisse
+import kotlinx.android.synthetic.main.activity_post.*
+import me.zhaoweihao.hnuplus.Interface.AnotherInterface
 
 
 class PostActivity : AppCompatActivity() {
@@ -16,15 +20,19 @@ class PostActivity : AppCompatActivity() {
     private var postFragment: PostFragment? = null
     public var path: String? = null
 
+    private var listener: AnotherInterface? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
+        setSupportActionBar(my_toolbar)
         fragmentManager = supportFragmentManager
         // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
         if (postFragment == null) {
             // If PostFragment is empty, create one and add to the screen
             postFragment = PostFragment()
+            setListener(postFragment!!)
             transaction.add(R.id.fl_post, postFragment)
         } else {
             // If PostFragment is not empty, it will be displayed directly
@@ -32,6 +40,15 @@ class PostActivity : AppCompatActivity() {
         }
         transaction.commit()
 
+    }
+
+    fun setListener(listener: AnotherInterface) {
+        this.listener = listener
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar,menu)
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -53,6 +70,20 @@ class PostActivity : AppCompatActivity() {
             }
 
 
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.action_submit ->{
+                listener!!.myMethod()
+                return true
+            }
+
+            else ->
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item)
         }
     }
 

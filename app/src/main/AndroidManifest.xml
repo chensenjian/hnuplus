@@ -23,7 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PostActivity" />
+        <activity android:name=".PostActivity"
+            android:theme="@style/MyTheme"
+            />
         <activity android:name=".CommentActivity" />
         <activity
             android:name=".SigninActivity"
