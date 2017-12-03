@@ -55,6 +55,7 @@ class PostActivity : AppCompatActivity() {
         when (requestCode) {
         //receive data from PostActivity
             2 -> if (resultCode == RESULT_OK) {
+                //uri to path
                 val uri = Matisse.obtainResult(data)[0]
                 listener!!.showImage(uri)
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
@@ -69,7 +70,6 @@ class PostActivity : AppCompatActivity() {
                 cursor.close()
 
             }
-
 
         }
     }

@@ -36,6 +36,7 @@ class SigninFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Gradient background
         anim = container_1!!.background as AnimationDrawable
         anim!!.setEnterFadeDuration(6000)
         anim!!.setExitFadeDuration(2000)

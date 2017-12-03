@@ -22,6 +22,9 @@ import me.zhaoweihao.hnuplus.R
  * Created by Administrator on 2017/11/9.
  */
 
+/**
+ * Show post's data to recyclerview
+ */
 class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     private var mContext: Context? = null

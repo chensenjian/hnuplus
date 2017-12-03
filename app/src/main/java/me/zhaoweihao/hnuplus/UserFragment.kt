@@ -77,7 +77,7 @@ class UserFragment : Fragment() {
         progressDialog!!.show()
 
         userInfo = BmobUser.getCurrentUser(MyUser::class.java)
-
+        //If userInfo is not null,it means the user login successfully
         if (userInfo != null) {
             tv_signinstatus!!.text = "Welcome " + userInfo!!.username
             btn_signin_1!!.visibility = View.GONE

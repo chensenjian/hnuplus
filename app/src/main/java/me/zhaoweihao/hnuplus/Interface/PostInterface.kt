@@ -5,6 +5,9 @@ import android.net.Uri
 /**
  * Created by Administrator on 2017/12/3.
  */
+/**
+ * Help PostActivity call PostFragment's public method
+ */
 interface PostInterface {
     fun myMethod()
     fun showImage(imageUri: Uri)

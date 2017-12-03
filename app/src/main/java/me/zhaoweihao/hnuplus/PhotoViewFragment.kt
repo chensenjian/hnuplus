@@ -23,6 +23,7 @@ class PhotoViewFragment :  Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Get imageUrl from last Acitivity and show it into photoview
         val intent = activity.intent
         val imageUrl = intent.getStringExtra("imageUrl")
         Glide.with(activity).load(imageUrl).into(photo_view)

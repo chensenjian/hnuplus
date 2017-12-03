@@ -33,7 +33,7 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //Gradient background
         anim = container_2!!.background as AnimationDrawable
         anim!!.setEnterFadeDuration(6000)
         anim!!.setExitFadeDuration(2000)
@@ -58,12 +58,12 @@ class SignupFragment : Fragment() {
                 bu.username = username
                 bu.setPassword(password)
                 bu.email = email
-                //注册
+                //signup
                 bu.signUp(object : SaveListener<MyUser>() {
                     override fun done(s: MyUser, e: BmobException?) {
                         if (e == null) {
                             Toast.makeText(activity, "signup successfully", Toast.LENGTH_SHORT).show()
-                            //注册成功后登录
+                            //Auto login after login successfully
                             bu.login(object : SaveListener<BmobUser>() {
 
                                 override fun done(bmobUser: BmobUser, e: BmobException?) {

@@ -13,7 +13,7 @@ class PhotoViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //Remove the ActionBar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findViewById(android.R.id.content).systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
@@ -22,15 +22,15 @@ class PhotoViewActivity : AppCompatActivity() {
 
         fragmentManager = supportFragmentManager
 
-        // 开启一个Fragment事务
+        // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
 
         if (photoViewFragment == null) {
-            // 如果MessageFragment为空，则创建一个并添加到界面上
+            // If PhotoViewFragment is empty, create one and add to the screen
             photoViewFragment = PhotoViewFragment()
             transaction.add(R.id.fl_photoview, photoViewFragment)
         } else {
-            // 如果MessageFragment不为空，则直接将它显示出来
+            // If PhotoViewFragment is not empty, it will be displayed directly
             transaction.show(photoViewFragment)
         }
         transaction.commit()

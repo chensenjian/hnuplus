@@ -20,12 +20,12 @@ class CommentActivity : AppCompatActivity() {
         // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
         if (commentFragment == null) {
-            // If Message Fragment is empty, create one and add to the screen
+            // If CommentFragment is empty, create one and add to the screen
             commentFragment = CommentFragment()
             setListener(commentFragment!!)
             transaction.add(R.id.fl_comment, commentFragment)
         } else {
-            // If MessageFragment is not empty, it will be displayed directly
+            // If CommentFragment is not empty, it will be displayed directly
             transaction.show(commentFragment)
         }
         transaction.commit()

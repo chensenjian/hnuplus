@@ -13,6 +13,9 @@ import me.zhaoweihao.hnuplus.R
  * Created by zhaoweihaoChina on 2017/11/10.
  */
 
+/**
+ * Show comment's data to recyclerview
+ */
 class CommentAdapter(private val mCommentList: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

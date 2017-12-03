@@ -71,13 +71,13 @@ public class CommentFragment extends Fragment implements CommentInterface {
         ButterKnife.bind(this, commentLayout);
 
         user = BmobUser.getCurrentUser(MyUser.class);
-
+        //Get data from HotFragment
         Intent intent = getActivity().getIntent();
         commentAuthorTextView.setText(intent.getStringExtra("author"));
         commentContentTextView.setText(intent.getStringExtra("content"));
         objectID = intent.getStringExtra("objectID");
         authorObjectID = intent.getStringExtra("authorObjectID");
-
+        //If imageUrl is null,it means no photo in this post
         if (intent.getStringExtra("imageUrl") == null){
 
         }else{
@@ -85,7 +85,7 @@ public class CommentFragment extends Fragment implements CommentInterface {
             Glide.with(this).load(intent.getStringExtra("imageUrl")).into(commentImageView);
             imageUrl = intent.getStringExtra("imageUrl");
         }
-
+        //If this imageview clicked,go to PhotoViewActivity for scale look
         commentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class CommentFragment extends Fragment implements CommentInterface {
                 startActivity(intent1);
             }
         });
-
+        //If this user equals to the post author,show delete button
         if(user == null){
             deleteFrameLayout.setVisibility(View.GONE);
         } else if(user.getObjectId().equals(authorObjectID)){
@@ -151,8 +151,7 @@ public class CommentFragment extends Fragment implements CommentInterface {
 
         return commentLayout;
     }
-
-
+    //Refresh comments's data
     private void refreshCommentData(String objectID){
 
         BmobQuery<Comment> query = new BmobQuery<Comment>();
@@ -165,7 +164,6 @@ public class CommentFragment extends Fragment implements CommentInterface {
             @Override
             public void done(List<Comment> objects,BmobException e) {
                 if(objects.size()==0){
-//                    Toast.makeText(getActivity(), "empty comment", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
                 }else{
                 Collections.reverse(objects);

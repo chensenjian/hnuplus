@@ -26,8 +26,6 @@ import me.zhaoweihao.hnuplus.Interface.PostInterface
 
 class PostFragment :  Fragment(), PostInterface {
 
-
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val postLayout = inflater!!.inflate(R.layout.post_layout, container,
@@ -49,6 +47,7 @@ class PostFragment :  Fragment(), PostInterface {
     }
 
     private fun showImageSelector(){
+        //Initialization Matisse image selector
         Matisse.from(activity)
                 .choose(setOf(MimeType.JPEG,MimeType.PNG))
                 .countable(true)
@@ -73,6 +72,7 @@ class PostFragment :  Fragment(), PostInterface {
 
     override fun myMethod() {
         val intent = Intent()
+        //Determine whether the user has a choice of pictures
         if((activity as PostActivity).path == null){
             intent.putExtra("data_return", et_post?.text.toString())
             activity.setResult(RESULT_OK,intent)
@@ -87,6 +87,7 @@ class PostFragment :  Fragment(), PostInterface {
     }
 
     override fun showImage(imageUri: Uri) {
+        //Show image after the user has a choice of pictures
         btn_pic.visibility = View.INVISIBLE
         tv_add_pic.visibility = View.INVISIBLE
         Glide.with(activity).load(imageUri).into(iv_show_pic)

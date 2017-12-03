@@ -25,15 +25,15 @@ class SigninActivity : AppCompatActivity() {
 
         fragmentManager = supportFragmentManager
 
-        // 开启一个Fragment事务
+        // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
 
         if (signinFragment == null) {
-            // 如果MessageFragment为空，则创建一个并添加到界面上
+            // If SigninFragment is empty, create one and add to the screen
             signinFragment = SigninFragment()
             transaction.add(R.id.fl_signin, signinFragment)
         } else {
-            // 如果MessageFragment不为空，则直接将它显示出来
+            // If SigninFragment is not empty, it will be displayed directly
             transaction.show(signinFragment)
         }
         transaction.commit()
@@ -42,7 +42,7 @@ class SigninActivity : AppCompatActivity() {
 
     open fun toSignupFragment(){
 
-        // 开启一个Fragment事务
+        // Open a Fragment transaction
         val transaction = (fragmentManager as FragmentManager?)!!.beginTransaction()
 
         if (signinFragment != null) {
@@ -50,11 +50,11 @@ class SigninActivity : AppCompatActivity() {
         }
 
         if (signupFragment == null) {
-            // 如果MessageFragment为空，则创建一个并添加到界面上
+            // If SignupFragment is empty, create one and add to the screen
             signupFragment = SignupFragment()
             transaction.add(R.id.fl_signin, signupFragment)
         } else {
-            // 如果MessageFragment不为空，则直接将它显示出来
+            // If SignupFragment is not empty, it will be displayed directly
             transaction.show(signupFragment)
         }
         transaction.commit()
