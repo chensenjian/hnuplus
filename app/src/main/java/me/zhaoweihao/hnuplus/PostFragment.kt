@@ -35,13 +35,13 @@ class PostFragment :  Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewTooltip
-                .on(et_post)
-                .autoHide(true,3000)
-                .corner(30)
-                .position(ViewTooltip.Position.BOTTOM)
-                .text("Share what you see today")
-                .show()
+//        ViewTooltip
+//                .on(et_post)
+//                .autoHide(true,3000)
+//                .corner(30)
+//                .position(ViewTooltip.Position.BOTTOM)
+//                .text("Share what you see today")
+//                .show()
         btn_submit!!.setOnClickListener {
             val intent = Intent()
             if((activity as PostActivity).path == null){
