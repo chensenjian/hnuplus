@@ -75,7 +75,9 @@ class PostAdapter(private val mPostList: List<Post>,private val disableCode: Int
         holder.postContent.text = post.content
         if(post.image == null){
             Glide.clear(holder.postImage)
+            holder.postImage.visibility = View.GONE
         }else{
+            holder.postImage.visibility = View.VISIBLE
             Glide.with(mContext).load(post.image!!.fileUrl).into(holder.postImage)
         }
 
