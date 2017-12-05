@@ -5,23 +5,13 @@ HNUPlus is a Campus Community Android application.Powered by [Bmob Cloud](https:
 This is still an ongoing project and does not represent the quality of the final work.
 ## Screenshots
 
+|           Signup            |          Main           |          Post           |
+| :-------------------------: | :---------------------: | :---------------------: |
+| ![Signup](./art/Signup.png) | ![Main](./art/Main.png) | ![Post](./art/Post.png) |
 
-
-
-| Main     | User    | Signup     |
-
-| :-------------: | :-------------: | :-------------: |
-
-| ![Main](./art/Main.png) | ![User](./art/User.png) | ![Signup](./art/Signup.png) |
-
-
-
-
-| Post     | Comments    | 
-
-| :-------------: | :-------------: | 
-
-| ![Post](./art/Post.png) | ![Comments](./art/Comments.png) | 
+|          User           |            Comments             |            Refresh            |
+| :---------------------: | :-----------------------------: | :---------------------------: |
+| ![User](./art/User.png) | ![Comments](./art/Comments.png) | ![Refresh](./art/Refresh.png) |
 
 
 ## APK Download
@@ -55,8 +45,10 @@ Open the `hunplus/` directory in Android Studio.
 + If none of the solutions above, file an issue or email me.
 
 ## Donate
-[![Paypal](./art/paypal.png)](https://www.paypal.me/zhaoweihao)
+[Paypal](https://www.paypal.me/zhaoweihao)
+
 [Alipay支付宝](http://op4e089f0.bkt.clouddn.com/1512475882201.jpg)
+
 ## License
 
 HUNPlus is under an MIT license. See the [LICENSE](LICENSE) for more information.
