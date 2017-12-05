@@ -37,12 +37,13 @@ Open the `hunplus/` directory in Android Studio.
 ### Troubleshooting
 
 + Update the Android Studio to latest version.
-
 + Update the Kotlin to latest version.
-
 + Try to clean the project and rebuild it.
-
 + If none of the solutions above, file an issue or email me.
+
+## Contact
+
+zhaoweihaochn#foxmail.com
 
 ## Donate
 [Paypal](https://www.paypal.me/zhaoweihao)
